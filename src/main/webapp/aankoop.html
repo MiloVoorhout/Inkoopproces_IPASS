@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="assets/styles/aankoop.css" rel="stylesheet" />
+    <link href="assets/styles/select2.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<title>Aankoop</title>
+</head>
+<body onload="initPage()">
+	<header>
+		 <img src="assets/images/maxedaLogo.png" class="header-image">
+	</header>
+	<div class="header-gradient"></div> 
+	
+	<div class="aankoop-content">
+        <div class="aankoop-form">
+            <h2>Voorstel</h2>
+            <div class="aankoop-div">
+            	<form>
+            		<div class="left-block">
+	            		<div>
+	            			<label class="gebruikerId">Werknemers ID:</label> 
+	            		</div>
+	            		<div>
+							<label class="gebruikerAfdeling">Afdeling:</label> 
+	            		</div>
+	            		<div>
+							<label>Product:</label>  
+							<select class="product-opties" name="producten" id="productSelect">
+
+							</select>
+	            		</div>
+	            		<div>
+							<label>Aantal:</label> 
+							<input type="number" id="voorstelAantal" name=aantal placeholder="Aantal..">
+	            		</div>
+            		</div>
+            		<div class="right-block">
+						<div>
+							<label class="gebruikerNaam">Naam:</label> 
+	            		</div>
+	            		<div>
+							<i class="fas fa-plus-circle"></i>
+	            		</div>
+            		</div>
+            		
+            		<div class="reden-block">
+	            		<label class="reden-label">Reden:</label>
+	            		<textarea maxlength="255" id="productReden" placeholder="Type hier de reden..."></textarea>
+            		</div>
+            		<div class="button-block">
+            			<i class="fas fa-arrow-alt-circle-left"></i>
+		            	<input type="button" class="insturen-button" name="insturen" value="Insturen">
+            		</div>
+            	</form>
+            </div>
+        </div>
+    </div>
+    
+	<div class="modal" id="modal">
+		<div class="modal-header">
+			<div class="title">Product toevoegen</div>
+			<button data-close-button class="close-button">&times;</button>
+		</div>
+		<div class="modal-body">
+			<form id="myForm">
+				<div class="form-questions">
+					<div>Product naam:</div>
+					<div>Product prijs:</div>	
+					<div>Categorie:</div>
+				</div>
+				<div class="form-inputs">
+					<div><input type="text" id="productNaam" name=naam placeholder="Naam product"></div>
+					<div><input type="number" id="productPrijs" name=prijs placeholder="00,00"></div>	
+					<div><input type="text" id="productCategorie" name=categorie placeholder="Categorie product"></div>
+				</div>
+			</form> 				    
+		</div>
+		<input type="submit" class="product-insturen" name="product-insturen" value="Insturen">
+	</div>
+	<div id="overlay"></div>
+	
+	<div id="toastGoed"></div>
+	 
+	<div id="toastFout">Gegevens fout ingevoerd!</div> 
+	
+
+<script src="assets/scripts/jQuery.js"></script>
+<script src="assets/scripts/select2.min.js"></script>
+<script>	
+$(document).ready(function() {
+    $('.product-opties').select2({
+    	width: "70%",
+    	placeholder: "Product...",
+    });
+});
+</script>
+<script src="assets/scripts/aankoop.js"></script>
+</body>
+</html>

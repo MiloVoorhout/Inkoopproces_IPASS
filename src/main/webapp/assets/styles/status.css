@@ -1,0 +1,103 @@
+body {
+	background: #ebebeb;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+/*===================
+    Status pagina
+===================*/
+header {
+	width: 100%;
+	background-color: white;
+}
+
+.header-image {
+	width: 15%;
+	padding: 10px 10px 5px 10px;
+}
+
+.header-gradient {
+	margin-top: 0px;
+	height: 1vh;
+   	background-image: linear-gradient(to right, #ffdc00, #f69408, #e20019)
+}
+
+.status-content {
+	max-width: 50%;
+	margin: 15vh auto;
+	box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
+	background: white;
+	
+}
+
+.status-area {
+	padding: 30px 30px 40px;	
+	background: white;
+}
+
+.status-area h2 {
+	margin-top: 0px;
+}
+
+.status-div {
+	padding: 4px 0px 4px 0px;
+	transform-text: uppercase;
+}
+
+.status-block {
+	display: inline-block;
+	border: 1px solid black;
+	width: 40%;
+	padding: 10px;
+	margin: 20px;
+}
+
+.status-block div{
+	padding-bottom: 1.5vh;
+}
+
+.status-block div:last-child{
+	padding-bottom: 0;
+}
+
+.product {
+	text-align: center;
+}
+
+.keuring-goed {
+	border-top: 1px solid black;
+	text-align: center;
+	padding-top: 1vh;
+	color: green;
+}
+
+.keuring-afgekeurd {
+	border-top: 1px solid black;
+	text-align: center;
+	padding-top: 1vh;
+	color: red	;
+}
+
+.keuring-afwachting {
+	border-top: 1px solid black;
+	text-align: center;
+	padding-top: 1vh;
+	color: #f8c807;
+}
+
+.button-block {
+	padding-top: 2vh;
+}
+
+.fa-arrow-alt-circle-left {
+	cursor: pointer;
+}
+
+.status-verwijderen {
+	cursor: pointer;
+	float: right;
+	font-size: 30px;
+}
+

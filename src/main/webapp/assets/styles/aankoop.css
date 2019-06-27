@@ -1,0 +1,427 @@
+body {
+	background: #ebebeb;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+/*===================
+    Aankoop pagina
+===================*/
+header {
+	width: 100%;
+	background-color: white;
+}
+
+.header-image {
+	width: 15%;
+	padding: 10px 10px 5px 10px;
+}
+
+.header-gradient {
+	margin-top: 0px;
+	height: 1vh;
+   	background-image: linear-gradient(to right, #ffdc00, #f69408, #e20019)
+}
+
+.aankoop-content {
+	max-width: 50%;
+	margin: 15vh auto;
+	box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
+}
+
+.aankoop-form {
+	padding: 30px 30px 40px;	
+	background: white;
+}
+
+.aankoop-form h2 {
+	margin-top: 0px;
+}
+
+.warning {
+	color: red;
+}
+
+.warningModal {
+	color: red;
+	padding: 7% 5% 0% 5%;
+}
+
+.aankoop-form textarea {
+	display: block;
+	width: 99%;
+	height: 10vh;
+}
+
+.aankoop-div {
+	padding: 4px 0px 4px 0px;
+	transform-text: uppercase;
+}
+
+.left-block {
+	display: inline-block;
+	width: 48%;
+}
+
+.left-block div {
+	padding-bottom: 2vh;
+}
+
+.right-block {
+	display: inline-block;
+	width: 48%;
+	vertical-align: top;
+}
+
+.right-block div {
+	padding-bottom: 6.8vh;
+}
+
+.button-block {
+	padding-top: 2vh;
+}
+
+#voorstelAantal {
+	border: 0;
+	width: 30%;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/*================
+	Buttons
+================*/
+.insturen-button {
+	float: right;
+	background-color: #a6a6a6;
+	border: 1px solid #a6a6a6;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.insturen-button:hover {
+	background-color: #364e57;
+	border: 1px solid #364e57;
+}
+
+.fa-arrow-alt-circle-left {
+	cursor: pointer;
+}
+
+
+/*=============================
+    Modal voor product voorstel
+=============================*/
+
+.fa-plus-circle {
+	cursor: pointer;
+}
+
+.modal {
+  	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%) scale(0);
+  	transition: 200ms ease-in-out;
+  	border: 1px solid white;
+  	border-radius: 10px;
+  	z-index: 10;
+  	background-color: white;
+  	width: 500px;
+  	max-width: 80%;
+}
+
+.modal.active {
+  	transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  	padding: 10px 15px;
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  	font-size: 1.25rem;
+  	font-weight: bold;
+}
+
+.modal-header .close-button {
+  	cursor: pointer;
+  	border: none;
+  	outline: none;
+  	background: none;
+  	font-size: 1.50rem;
+  	font-weight: bold;
+}
+
+.modal-body {
+  	padding: 7% 5% 0% 5%;
+}
+
+#overlay {
+  	position: fixed;
+  	opacity: 0;
+  	transition: 200ms ease-in-out;
+  	top: 0;
+  	left: 0;
+  	right: 0;
+  	bottom: 0;
+  	background-color: rgba(0, 0, 0, .7);
+  	pointer-events: none;
+}
+
+#overlay.active {
+  	opacity: 1;
+  	pointer-events: all;
+}
+
+.modalAddCountry{
+	margin-bottom: 15px;
+}
+
+#myForm{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.form-questions div {
+	padding-bottom: 1.5vh;
+}
+
+.form-inputs div{
+	padding-bottom: 1.5vh;
+}
+
+.product-insturen {
+	background-color: #a6a6a6;
+	border: 1px solid #a6a6a6;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 0.85rem;
+	float: right;
+	margin: 15px 20px 30px 0;
+	cursor: pointer;
+}
+
+.product-insturen:hover {
+	background-color: #364e57;
+	border: 1px solid #364e57;
+}
+
+
+/*=====================
+      Toasts goed
+=====================*/
+
+#toastGoed {
+	visibility: hidden; 
+	min-width: 250px; 
+	margin-left: -125px; 
+	background-color: #3ab659; 
+	color: #fff; 
+	text-align: center; 
+	border-radius: 2px; 
+	padding: 16px;
+	position: fixed;
+	z-index: 1; 
+	left: 50%; 
+	bottom: 30px; 
+}
+
+#toastGoed.show {
+  visibility: visible; 
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/*=====================
+      Toasts fout
+=====================*/
+
+#toastFout {
+	visibility: hidden; 
+	min-width: 250px; 
+	margin-left: -125px; 
+	background-color: red; 
+	color: #fff; 
+	text-align: center; 
+	border-radius: 2px; 
+	padding: 16px;
+	position: fixed;
+	z-index: 1; 
+	left: 50%; 
+	bottom: 30px; 
+}
+
+#toastFout.show {
+  visibility: visible; 
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/*=====================
+         Fade
+=====================*/
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/*==================
+	Phone version
+==================*/
+
+@media only screen and (max-width: 500px) {
+	body {
+		background-color: white;
+	}
+	
+	.header-image {
+		width: 60%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.aankoop-content {
+		max-width: 100%;
+		margin: 0;
+		box-shadow: none;
+	}
+	
+	.aankoop-form {
+		padding: 15px 15px 20px;	
+		background: white;
+	}
+	
+	#voorstelAantal {
+		width: 55%;
+	}
+		
+	.left-block {
+		width: 100%;
+	}
+	
+	.right-block {
+		width: 100%;
+	}
+	
+	.right-block div {
+		padding-bottom: 2vh;
+	}	
+	
+	.modal {
+	  	font-size: 15px;
+	  	width: 90%;
+  		max-width: 100%;
+	}
+	
+	.form-questions div {
+		padding-bottom: 2vh;
+	}
+	
+	#toastFout {
+		margin-left: 0;
+	  	transform: translate(-50%, -50%);
+	}
+	
+	#toastGoed {
+		margin-left: 0;
+	  	transform: translate(-50%, -50%);
+	}
+	
+}
+
+@media only screen and (min-width: 501px) and (max-width: 750px) {
+	body {
+		background-color: white;
+	}
+	
+	.header-image {
+		width: 40%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.aankoop-content {
+		max-width: 100%;
+		margin: 0;
+		box-shadow: none;
+	}
+	
+	.aankoop-form {
+		padding: 15px 15px 20px;	
+		background: white;
+	}
+	
+	#voorstelAantal {
+		width: 55%;
+	}
+		
+	.left-block {
+		width: 100%;
+	}
+	
+	.right-block {
+		width: 100%;
+	}
+	
+	.right-block div {
+		padding-bottom: 2vh;
+	}	
+	
+	.modal {
+	  	width: 90%;
+  		max-width: 100%;
+	}
+	
+	.form-questions div {
+		padding-bottom: 1.8vh;
+	}
+	
+	#toastFout {
+		margin-left: 0;
+	  	transform: translate(-50%, -50%);
+	}
+	
+	#toastGoed {
+		margin-left: 0;
+	  	transform: translate(-50%, -50%);
+	}
+}

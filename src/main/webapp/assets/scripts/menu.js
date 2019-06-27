@@ -1,0 +1,52 @@
+function initPage() {
+	const goToAankoop = document.querySelector('#aankoop');
+	const goToStatus = document.querySelector('#status');
+	
+	goToAankoop.addEventListener('click', function() {
+		console.log("aankoop");
+		window.location.href = "/inkoop/aankoop.html";
+	})
+	
+	goToStatus.addEventListener('click', function() {
+		window.location.href = "/inkoop/status.html";
+	})
+	
+	keurenButton();
+	uitlogButton();
+	
+	console.log(sessionStorage);
+	
+}
+
+function keurenButton() {
+	const menuButtonBody = document.querySelector('.menu-buttons');
+	
+	var role = sessionStorage.getItem("rol");
+	if (role === "Voorstel manager") {
+		menuButtonBody.innerHTML += '<div class="button-div">' +
+    								'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
+    								'</div>';
+    								
+    	const goToKeuren = document.querySelector('#keuren');    	
+    	goToKeuren.addEventListener('click', function() {
+    		window.location.href = "/inkoop/product_keuren.html";
+    	})    								
+	} else if (role === "Budget manager") {
+		menuButtonBody.innerHTML += '<div class="button-div">' +
+									'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
+									'</div>';
+		
+		const goToKeuren = document.querySelector('#keuren');							
+		goToKeuren.addEventListener('click', function() {
+			window.location.href = "/inkoop/budget_keuren.html";
+		})
+	}
+}
+
+function uitlogButton() {
+	const uitloggen = document.querySelector(".uitlog-button");
+	uitloggen.addEventListener('click', function() {
+		sessionStorage.clear();		
+		window.location.href = "/inkoop/";
+	})
+}

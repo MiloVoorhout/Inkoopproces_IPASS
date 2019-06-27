@@ -1,0 +1,53 @@
+body {
+	background: #ebebeb;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+/*===================
+    Login pagina
+===================*/
+
+.login-content {
+	max-width: 40%;
+	margin: 30vh auto;
+	box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
+}
+
+.login-form {
+	padding: 30px 30px 20px;	
+	background: white;
+}
+
+.login-form h2 {
+	margin-top: 0px;
+}
+
+.form-group {
+	padding: 4px 0px 4px 0px;
+	transform-text: uppercase;
+}
+
+form .form-group input {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.login-button {
+	background-color: #FE6055;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;;
+	font-weight: bold;
+}
+
+.login-button:hover {
+	background-color: yellow;
+}
