@@ -54,7 +54,7 @@ header {
 .budget-block {
 	display: inline-block;
 	border: 1px solid black;
-	width: 40%;
+	width: auto;
 	padding: 10px;
 	margin: 20px 20px 20px 7%;
 }
@@ -108,4 +108,139 @@ header {
 
 .fa-arrow-alt-circle-left {
 	cursor: pointer;
+}
+
+
+/*==================
+	Phone version
+==================*/
+
+@media only screen and (max-width: 524px) {
+	body {
+		background-color: white;
+	}
+	
+	.header-image {
+		width: 60%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.keuren-content {
+		max-width: 100%;
+		margin: 1vh auto;
+		box-shadow: none;
+		background: white;
+	}
+		
+	.keuren-area {
+		padding: 10px 10px 15px;	
+		background: white;
+	}	
+	
+	.budget-hole {
+		display: block;
+		text-align: center;
+		padding-bottom: 6vh;
+	}
+		
+	.budget-block {
+		display: block;
+		border: 1px solid black;
+		width: 80%;
+		padding: 10px;
+		margin: 20px 20px 20px 7%;
+	}
+	
+	.budget-buttons {
+		margin-top: auto;
+		margin-bottom: auto;
+		font-size: 45px;
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 525px) and (max-width: 750px) {
+	body {
+		background-color: white;
+	}
+	
+	.header-image {
+		width: 40%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.keuren-content {
+		max-width: 90%;
+		margin: 1vh auto;
+		box-shadow: none;
+		background: white;
+	}
+		
+	.keuren-area {
+		padding: 10px 10px 15px;	
+		background: white;
+	}	
+	
+	.budget-hole {
+		display: flex;
+		justify-content: space-around;
+	}
+		
+	.budget-block {
+		display: inline-block;
+		border: 1px solid black;
+		width: auto;
+		padding: 10px;
+		margin: 20px 20px 20px 7%;
+	}
+	
+	.budget-buttons {
+		margin-top: auto;
+		margin-bottom: auto;
+		font-size: 45px;
+		width: 35%;
+	}
+}
+
+@media only screen and (min-width: 751px) and (max-width: 982px) {
+	body {
+		background-color: white;
+	}
+	
+	.header-image {
+		width: 20%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.keuren-content {
+		max-width: 90%;
+		margin: 1vh auto;
+		box-shadow: none;
+		background: white;
+	}
+		
+	.keuren-area {
+		padding: 10px 10px 15px;	
+		background: white;
+	}	
+	
+	.budget-hole {
+		display: flex;
+		justify-content: space-around;
+	}
+		
+	.budget-block {
+		display: inline-block;
+		border: 1px solid black;
+		width: auto;
+		padding: 10px;
+		margin: 20px 20px 20px 7%;
+	}
+	
+	.budget-buttons {
+		margin-top: auto;
+		margin-bottom: auto;
+		font-size: 45px;
+		width: 35%;
+	}
 }

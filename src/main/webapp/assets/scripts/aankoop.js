@@ -72,7 +72,7 @@ function saveProductVoorstel() {
 		var productCategorie = document.getElementById('productCategorie').value;
 		var gebruikerId = sessionStorage.getItem("id");
 		
-		if(productPrijs !== 0 && productNaam.length !== 0 && productCategorie.length !== 0) {
+		if(productPrijs.length !== 0 && productNaam.length !== 0 && productCategorie.length !== 0) {
 			fetch("/inkoop/restservices/gekeurde_voorstellen/save", { 
 				method: 'POST', 
 				body: JSON.stringify({productNaam, gebruikerId})})

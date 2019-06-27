@@ -13,12 +13,12 @@ function initPage() {
 function loadProductVoorstellen() {
 	var productVoorstelBody = document.querySelector("#voorstel");
 	var budget = document.querySelector(".budget-div");
-	
+	var userId = sessionStorage.getItem("id");
 	
 	budget.innerHTML = '';
 	productVoorstelBody.innerHTML = '';
 	
-	fetch('restservices/product_voorstel')
+	fetch('restservices/product_voorstel/' + userId)
 	.then(response => response.json())
 	.then(function(pvoorstellen){
 		for(const voorstel of pvoorstellen) {

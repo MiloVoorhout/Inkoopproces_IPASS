@@ -49,5 +49,33 @@ form .form-group input {
 }
 
 .login-button:hover {
-	background-color: yellow;
+	background-color: #d81101;
+}
+
+/*==================
+	Phone version
+==================*/
+
+@media only screen and (max-width: 500px) {
+	body {
+		background-color: white;
+	}
+	
+	.login-content {
+		max-width: 100%;
+		margin: 22vh auto;
+		box-shadow: none;
+	}
+}
+
+@media only screen and (min-width: 501px) and (max-width: 750px) {
+	body {
+		background-color: white;
+	}
+	
+	.login-content {
+		max-width: 80%;
+		margin: 22vh auto;
+		box-shadow: none;
+	}
 }

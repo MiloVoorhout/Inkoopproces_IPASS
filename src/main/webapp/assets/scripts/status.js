@@ -19,10 +19,10 @@ function loadStatus() {
 		for(const status of statussen) {
 			if(status.status === "Goed gekeurd") {
 				statusCSS = "keuring-goed";
-				statusHeader = '<label class="status-verwijderen">&times;</label>';
+				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
 			} else if (status.status === "Afgekeurd") {
 				statusCSS = "keuring-afgekeurd";
-				statusHeader = '<label class="status-verwijderen">&times;</label>';
+				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
 			} else {
 				statusCSS = "keuring-afwachting";
 				statusHeader = '';
