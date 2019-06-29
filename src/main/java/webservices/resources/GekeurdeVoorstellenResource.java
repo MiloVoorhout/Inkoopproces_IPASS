@@ -20,7 +20,6 @@ import org.json.simple.parser.ParseException;
 
 import inkoop.gekeurdevoorstellen.GekeurdeVoorstellen;
 import inkoop.gekeurdevoorstellen.GekeurdeVoorstellenDaoImpl;
-import inkoop.productvoorstel.ProductVoorstel;
 
 
 @Path("/gekeurde_voorstellen")
@@ -30,6 +29,7 @@ public class GekeurdeVoorstellenResource {
     @GET
     @Path("/{userId}")
     @Produces("application/json")
+//    @RolesAllowed("admin")
     public String getGekeurdeVoorstellen(@PathParam("userId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
@@ -75,15 +75,25 @@ public class GekeurdeVoorstellenResource {
         return updateGekeurdeVoorstel;
     }
     
+    @PUT
+    @Path("/update_product")
+    @Produces("application/json")
+    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    	
+    	JSONParser parser = new JSONParser();
+    	JSONObject json = (JSONObject) parser.parse(response);
+
+    	int gekeurdeVoorstelId = Integer.parseInt(json.get("gkVoorstelId").toString());
+    	String gekeurdeVoorstelName = json.get("updateName").toString();
+
+        boolean updateName = gekeurdeVoorstelleDao.updateProduct(gekeurdeVoorstelId, gekeurdeVoorstelName);
+        return updateName;
+    }
+    
     @DELETE
     @Path("delete/{statusId}")
     @Produces("application/json")
     public Response deleteStatus(@PathParam("statusId") int id) {
-        boolean deleted = false;
-
-        JsonObjectBuilder job = Json.createObjectBuilder();
         boolean deleteStatus = gekeurdeVoorstelleDao.delete(id);
-
         return Response.ok(deleteStatus).build();
     }
 }

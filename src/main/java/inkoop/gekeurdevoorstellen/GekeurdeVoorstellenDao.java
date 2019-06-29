@@ -10,5 +10,7 @@ public interface GekeurdeVoorstellenDao {
     
     public Boolean update(int id, String status);
     
+    public Boolean updateProduct(int id, String name);
+    
     public Boolean delete(int id);
 }

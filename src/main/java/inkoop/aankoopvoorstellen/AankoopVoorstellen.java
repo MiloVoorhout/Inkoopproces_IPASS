@@ -30,6 +30,13 @@ public class AankoopVoorstellen {
 		this.gebruikers_id = gebruikers_id;
 	}
 	
+	public AankoopVoorstellen(int id, int aantal, int gk_voorstel_id, String naam) {
+		this.id = id;
+		this.aantal = aantal;
+		this.gk_voorstel_id = gk_voorstel_id;
+		this.naam = naam;
+	}
+	
 	public AankoopVoorstellen(int aantal, String reden, int product_id, int gebruikers_id, int gk_voorstel_id) {
 		this.aantal = aantal;
 		this.reden = reden;

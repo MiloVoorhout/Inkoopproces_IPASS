@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="assets/styles/products.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<title>Products</title>
+	<style>
+		table {
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+		
+		th, td {
+		  text-align: center;
+		  padding: 8px;
+		}
+		
+		tr:nth-child(even) {background-color: #f2f2f2;}
+	</style>
+</head>
+<body onload="initPage()">
+	<header>
+		 <img src="assets/images/maxedaLogo.png" class="header-image">
+	</header>
+	<div class="header-gradient"></div> 
+	
+	<div class="products-content">
+        <div class="products-form">
+            <h2>Producten</h2>
+            <div class="products-div">
+            	<table style="text-align: center;">
+					<thead>
+						<tr>
+							<th>Naam</th>
+							<th>Prijs</th>
+							<th>Categorie</th>
+						</tr>
+					</thead>
+					<tbody id="productTabel">
+
+					</tbody>
+				</table>
+            	<div class="button-block">
+            		<i class="fas fa-arrow-alt-circle-left"></i>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+	<div id="toastDelete">Product is verwijderd</div>
+	
+	<div id="toastUpdate">Product is geupdate</div>
+	 
+	<div id="toastFout">Fout opgetreden tijdens uitvoeren!</div> 
+	
+	<script src="assets/scripts/products.js"></script>
+</body>
+</html>

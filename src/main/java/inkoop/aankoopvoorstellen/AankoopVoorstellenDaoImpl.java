@@ -45,6 +45,33 @@ public class AankoopVoorstellenDaoImpl extends PostgresBaseDao implements Aankoo
         }
         return aankoopVoorstellen;
 	}
+	
+	public List<AankoopVoorstellen> findByProductId(int id) {
+		List<AankoopVoorstellen> aankoopVoorstellen = new ArrayList<>();
+		
+        try {
+            String getQuery = "Select a.*, p.naam FROM aankoop_voorstellen a JOIN product p ON p.id = a.product_id WHERE a.product_id = ?";
+            PreparedStatement getAankoopVoorstellen = conn.prepareStatement(getQuery);
+            getAankoopVoorstellen.setInt(1,id);
+            ResultSet results = getAankoopVoorstellen.executeQuery();
+            
+            while (results.next()) {
+
+            	aankoopVoorstellen.add(new AankoopVoorstellen(
+                		results.getInt("id"),
+                		results.getInt("aantal"),
+                        results.getInt("gk_voorstel_id"), 
+                        results.getString("naam")
+                ));
+            }
+
+            results.close();
+            getAankoopVoorstellen.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aankoopVoorstellen;
+	}
 
 
 	public Boolean save(AankoopVoorstellen aankoopVoorstellen) {

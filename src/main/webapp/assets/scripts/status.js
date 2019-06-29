@@ -12,6 +12,8 @@ function loadStatus() {
 	var statusBody = document.querySelector(".status-div");
 	var userId = sessionStorage.getItem("id");
 	
+//	, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}}
+	
 	fetch('restservices/gekeurde_voorstellen/'+userId)
 	.then(response => response.json())
 	.then(function(statussen){
@@ -20,7 +22,7 @@ function loadStatus() {
 			if(status.status === "Goed gekeurd") {
 				statusCSS = "keuring-goed";
 				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
-			} else if (status.status === "Afgekeurd") {
+			} else if (status.status === "Afgekeurd" || status.status === "Product verwijderd") {
 				statusCSS = "keuring-afgekeurd";
 				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
 			} else {

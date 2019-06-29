@@ -17,6 +17,13 @@ function loadProductVoorstellen() {
 	
 	budget.innerHTML = '';
 	productVoorstelBody.innerHTML = '';
+		
+	if (!($(window).width() < 960)) {
+		$(".keuren-content").css("max-width",  "50%");
+	} else {
+		$(".voorstel-div").css({'width': '%', 'height' : '', 'overflow-y' : '', 'display' : 'inline-block', 'padding' : '4px 0px 4px 0px'});
+	}
+	$( "div.tableClass" ).toggleClass("budget-div");
 	
 	fetch('restservices/product_voorstel/' + userId)
 	.then(response => response.json())
@@ -118,6 +125,13 @@ function loadAankoopVoorstellen() {
 	
 	var userId = sessionStorage.getItem("id");
 	
+	if (!($(window).width() < 960)) {
+		$(".keuren-content").css("max-width", "65%");
+	} else {
+		$(".voorstel-div").css({'width': '80%', 'height' : '39vh', 'overflow-y' : 'auto', 'display' : 'inline-block', 'padding' : '4px 0px 4px 0px'});
+	}
+	
+	
 	fetch('restservices/aankoop_voorstellen/'+userId)
 	.then(response => response.json())
 	.then(function(aankoopVoorstellen){
@@ -171,6 +185,7 @@ function aankoopVoorstelGoedKeuren() {
 			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
 			.then(response => response.json())
 		    .then(function(response){
+		    	console.log(response.naam);
 		    	if(response) {
 		    		fetch("restservices/budget/update/aankoop_voorstel", {method: 'PUT', body: JSON.stringify({budgetAfdeling, budgetPrijs, type})})
 					.then(response => response.json())
@@ -218,19 +233,38 @@ function loadBudget() {
 	var budgetAfdeling = document.querySelector(".budget-afdelingen");
 	var budgetDiv = document.querySelector(".budget-div");
 	
-	budgetDiv.innerHTML += '<div>Budget:</div>' +
-							 '<div class="all-budgets"></div>' +
-							 '<input type="submit" class="budget-button" name="budget-voorstel" value="Budget +">';
-	
-	var budgetLijst = document.querySelector(".all-budgets");
+	budgetDiv.innerHTML += '<table boder="1" class="budget-table">' +
+								'<thead>' +
+									'<tr>' +
+										'<th>Afdeling</th>' +
+										'<th>Budget</th>' +
+									'</tr>' +
+								'</thead>' +
+								'<div>' +
+									'<tbody id="budgetTabel">' +
+									'</tbody>' +
+								'</div>' +
+							'</table>' +
+							'<input type="submit" class="budget-button" name="budget-voorstel" value="Budget +">';
+		
+		
+
 	
 	fetch('restservices/budget')
 	.then(response => response.json())
 	.then(function(budgets){
+		var table = document.querySelector("#budgetTabel");
+
 		for(budget of budgets) {
-			budgetLijst.innerHTML += '<div class="one-budget">' + budget.budget + '</div>';
+			var newRow = table.insertRow(-1);
 			
-			budgetAfdeling.innerHTML +=  '<option value="' + budget.id + '">' + budget.afdeling + '</option>';
+			var cel1 = newRow.insertCell(0);
+			var cel2 = newRow.insertCell(1);
+			
+			cel1.innerHTML = budget.afdeling;
+			cel2.innerHTML = '€ ' + (budget.budget).toFixed(2);
+			
+			budgetAfdeling.innerHTML += '<option value="' + budget.id + '">' + budget.afdeling + '</option>';
 		}
 		
 		budgetVoorstel();
@@ -245,6 +279,7 @@ function select(selectOption) {
 		loadProductVoorstellen();
 	} else {
 		console.log("aankoop");
+		$( "div.tableClass" ).toggleClass("budget-div");
 		loadAankoopVoorstellen();
    }
 }
@@ -312,6 +347,11 @@ function makeModal() {
 	const budgetVergroting = document.querySelector('.budget-vergroting');
 	
 	openModalButton.addEventListener('click', function(){
+		if (($(window).width() < 960)) {
+			console.log("hellow")
+			$(".voorstel-div").css('overflow-y' , '');
+		}
+		
 		budgetVergroting.value = '';
 		modal.classList.add('active')
 		overlay.classList.add('active')
@@ -320,11 +360,19 @@ function makeModal() {
 	overlay.addEventListener('click', function(){
 		modal.classList.remove('active');
 		overlay.classList.remove('active');
+		
+		if (($(window).width() < 960)) {
+			$(".voorstel-div").css('overflow-y' , 'auto');
+		}
 	})
 
 	closeModalButton.addEventListener('click', function() {
 		modal.classList.remove('active');
 		overlay.classList.remove('active');
+		
+		if (($(window).width() < 960)) {
+			$(".voorstel-div").css('overflow-y' , 'auto');
+		}
 	})
 }
 

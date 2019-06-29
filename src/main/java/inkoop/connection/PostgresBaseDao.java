@@ -1,4 +1,4 @@
-package inkoop.connection;
+ package inkoop.connection;
 
 
 import java.sql.Connection;

@@ -76,6 +76,22 @@ public class GekeurdeVoorstellenDaoImpl extends PostgresBaseDao implements Gekeu
         return false;
     }
     
+    public Boolean updateProduct(int id, String name) {
+        try {
+            String updateQuery = "UPDATE gekeurde_voorstellen SET product = ? WHERE id = ?;";
+            PreparedStatement update = conn.prepareStatement(updateQuery);
+            update.setString(1, name);
+            update.setInt(2, id);
+            update.executeUpdate();
+            
+            update.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public Boolean delete(int id) {
         try {
             String deleteQuery = "DELETE FROM gekeurde_voorstellen WHERE id = ?";

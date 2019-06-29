@@ -28,7 +28,7 @@ public class AankoopVoorstellenResource {
     @GET
     @Path("/{userId}")
     @Produces("application/json")
-    public String getProducts(@PathParam("userId") int id) {
+    public String getAankoopvoorstel(@PathParam("userId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (AankoopVoorstellen aankoopVoorstel : aankoopVoorstelDao.findAll(id)) {
@@ -43,6 +43,27 @@ public class AankoopVoorstellenResource {
             job.add("naam", aankoopVoorstel.getNaam());
             job.add("totaalPrijs", (aankoopVoorstel.getAantal() * aankoopVoorstel.getPrijs()));
             job.add("afdeling", aankoopVoorstel.getAfdeling());
+
+            jab.add(job);
+        }
+
+        JsonArray array = jab.build();
+        return array.toString();
+    }
+    
+    @GET
+    @Path("/products/{productId}")
+    @Produces("application/json")
+    public String getAankoopvoorstelProductId(@PathParam("productId") int id) {
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        
+        for (AankoopVoorstellen aankoopVoorstel : aankoopVoorstelDao.findByProductId(id)) {
+            JsonObjectBuilder job = Json.createObjectBuilder();
+            
+            job.add("id", aankoopVoorstel.getId());
+            job.add("aantal", aankoopVoorstel.getAantal());
+            job.add("gk_id", aankoopVoorstel.getGk_voorstel_id());
+            job.add("naam", aankoopVoorstel.getNaam());
 
             jab.add(job);
         }

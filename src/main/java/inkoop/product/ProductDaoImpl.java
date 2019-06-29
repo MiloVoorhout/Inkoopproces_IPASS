@@ -54,15 +54,36 @@ public class ProductDaoImpl extends PostgresBaseDao implements ProductDao {
         return false;
 	}
 
-	public Boolean update(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+    public Boolean update(int id, String name, double price, String categorie) {
+        try {
+            String updateQuery = "UPDATE product SET naam = ?, prijs = ?, categorie = ? WHERE id = ?;";
+            PreparedStatement update = conn.prepareStatement(updateQuery);
+            update.setString(1, name);
+            update.setDouble(2, price);
+            update.setString(3, categorie);
+            update.setInt(4, id);
+            update.executeUpdate();
+            
+            update.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+	public Boolean delete(int id) {
+    	try {
+            String deleteQuery = "DELETE FROM product WHERE id = ?";
+            PreparedStatement delete = conn.prepareStatement(deleteQuery);
+            delete.setInt(1, id);
+            delete.executeUpdate();
+            
+            delete.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 	}
-
-	public Boolean delete(Product product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

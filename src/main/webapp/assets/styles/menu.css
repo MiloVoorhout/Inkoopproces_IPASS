@@ -26,7 +26,7 @@ header {
 
 .menu-content {
 	max-width: 40%;
-	margin: 18vh auto;
+	margin: 16vh auto;
 	box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
 }
 
@@ -97,18 +97,18 @@ header {
 	}
 }
 
-@media only screen and (min-width: 501px) (max-width: 750px) {
+@media only screen and (min-width: 501px) and (max-width: 586px) {
 	body {
 		background: white;
 	}
 	
 	.header-image {
-		width: 60%;
+		width: 45%;
 		padding: 10px 10px 5px 10px;
 	}
 	
 	.menu-content {
-		max-width: 80%;
+		max-width: 90%;
 		margin: 2vh auto;
 		box-shadow: none;
 	}
@@ -120,5 +120,65 @@ header {
 	
 	.menu-button {
 		width: 70%;;
+	}
+}
+
+@media only screen and (min-width: 587px) and (max-width: 680px) {
+	body {
+		background: white;
+	}
+	
+	.header-image {
+		width: 30%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.menu-content {
+		max-width: 90%;
+		margin: 2vh auto;
+		box-shadow: none;
+	}
+	
+	.menu-form {
+		padding: 15px 15px 20px;	
+		background: white;
+	}
+	
+	.menu-button {
+		width: 50%;;
+	}
+}
+
+@media only screen and (min-width: 681px) and (max-width: 850px) {
+	.header-image {
+		width: 30%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.menu-content {
+		max-width: 60%;
+		margin: 16vh auto;
+		box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
+	}
+	
+	.menu-button {
+		width: 35%;;
+	}
+}
+
+@media only screen and (min-width: 851px) and (max-width: 1114px) {
+	.header-image {
+		width: 20%;
+		padding: 10px 10px 5px 10px;
+	}
+	
+	.menu-content {
+		max-width: 50%;
+		margin: 16vh auto;
+		box-shadow: 7.5px 8.5px 10px 2.5px #7b7b7b;
+	}
+	
+	.menu-button {
+		width: 35%;;
 	}
 }

@@ -14,8 +14,6 @@ function initPage() {
 	keurenButton();
 	uitlogButton();
 	
-	console.log(sessionStorage);
-	
 }
 
 function keurenButton() {
@@ -27,15 +25,27 @@ function keurenButton() {
     								'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
     								'</div>';
     								
+    	menuButtonBody.innerHTML += '<div class="button-div">' +
+    								'<input type="submit" class="menu-button" name="product" value="Producten" id="producten">';
+    								'</div>';
+    	
+    	$(".menu-content").css("margin", "6vh auto");
     	const goToKeuren = document.querySelector('#keuren');    	
     	goToKeuren.addEventListener('click', function() {
     		window.location.href = "/inkoop/product_keuren.html";
-    	})    								
+    	})   
+    	
+    	const goToProducten = document.querySelector('#producten');   
+    	goToProducten.addEventListener('click', function() {
+    		window.location.href = "/inkoop/products.html";
+    	})   
+    	
 	} else if (role === "Budget manager") {
 		menuButtonBody.innerHTML += '<div class="button-div">' +
 									'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
 									'</div>';
 		
+		$(".menu-content").css("margin", "12vh auto");
 		const goToKeuren = document.querySelector('#keuren');							
 		goToKeuren.addEventListener('click', function() {
 			window.location.href = "/inkoop/budget_keuren.html";
