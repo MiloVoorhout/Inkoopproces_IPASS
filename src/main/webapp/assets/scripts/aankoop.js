@@ -86,6 +86,12 @@ function saveProductVoorstel() {
 					    .then(function(myJson) {
 					    	console.log(myJson);
 							$("#productNaam, #productPrijs, #productCategorie").val('');
+							
+							const modal = document.querySelector('.modal');
+							const overlay = document.getElementById('overlay');
+							
+							modal.classList.remove('active');
+							overlay.classList.remove('active');
 														
 							var toastUp = document.getElementById("toastGoed");
 							toastUp.innerHTML = "Product voorstel ingediend!";

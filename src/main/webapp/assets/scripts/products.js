@@ -57,42 +57,72 @@ function deleteButton() {
 			fetch('restservices/aankoop_voorstellen/products/'+id)
 			.then(response => response.json())
 			.then(function(aankoopVoorstellen){
-				for(voorstel of aankoopVoorstellen){
-					var gkVoorstelId = voorstel.gk_id;
-					var updateStatus = "Product verwijderd";
-					var aankoopVoorstelId = voorstel.id;
-					
-					fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
-					.then(response => response.json())
+				if(aankoopVoorstellen.length === 0) {
+					fetch("restservices/product/delete/"+id, {method: 'DELETE'})
 				    .then(function(response){
 				    	if(response) {
-						    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
-						    .then(function(response){
-						    	if(response) {
-								    fetch("restservices/product/delete/"+id, {method: 'DELETE'})
-								    .then(function(response){
-								    	if(response) {
-									    	console.log(response);
-									    	loadProducts();
-									    	var toastUp = document.getElementById("toastDelete");
-											toastUp.className = "show";
-											setTimeout(function(){ 
-												toastUp.className = toastUp.className.replace("show", ""); 
-											}, 3000);
-								    	} else {
-								    		var toastUp = document.getElementById("toastFout");
-											toastUp.className = "show";
-											setTimeout(function(){ 
-												toastUp.className = toastUp.className.replace("show", ""); 
-											}, 3000);
-								    	}
-								    })
-						    	}
-						    })
+					    	console.log(response);
+					    	loadProducts();
+					    	var toastUp = document.getElementById("toastDelete");
+							toastUp.className = "show";
+							setTimeout(function(){ 
+								toastUp.className = toastUp.className.replace("show", ""); 
+							}, 3000);
+				    	} else {
+				    		var toastUp = document.getElementById("toastFout");
+							toastUp.className = "show";
+							setTimeout(function(){ 
+								toastUp.className = toastUp.className.replace("show", ""); 
+							}, 3000);
 				    	}
 				    })
+				} else if (aankoopVoorstellen.length > 0) {
+					for(voorstel of aankoopVoorstellen){
+						var gkVoorstelId = voorstel.gk_id;
+						var updateStatus = "Product verwijderd";
+						var aankoopVoorstelId = voorstel.id;
+	
+						fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+						.then(response => response.json())
+					    .then(function(response){
+					    	if(response) {
+							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
+							    .then(function(response){
+							    	if(response) {
+									    fetch("restservices/product/delete/"+id, {method: 'DELETE'})
+									    .then(function(response){
+									    	if(response) {
+										    	console.log(response);
+										    	var toastUp = document.getElementById("toastDelete");
+												toastUp.className = "show";
+												setTimeout(function(){ 
+													toastUp.className = toastUp.className.replace("show", ""); 
+												}, 3000);
+									    	} else {
+									    		var toastUp = document.getElementById("toastFout");
+												toastUp.className = "show";
+												setTimeout(function(){ 
+													toastUp.className = toastUp.className.replace("show", ""); 
+												}, 3000);
+									    	}
+									    })
+							    	}
+							    })
+					    	}
+					    })
+					}	
 					
-				}	
+					loadProducts();
+					
+				} else {
+					var toastUp = document.getElementById("toastFout");
+					toastUp.className = "show";
+					setTimeout(function(){ 
+						toastUp.className = toastUp.className.replace("show", ""); 
+					}, 3000);
+					
+					loadProducts();
+				}
 			})
 		});
 	}
@@ -184,7 +214,9 @@ function editButton() {
 								}
 						    })
 						}
+						
 						loadProducts();
+						
 					} else {
 						var toastUp = document.getElementById("toastFout");
 						toastUp.className = "show";
