@@ -27,7 +27,7 @@ function loadProductVoorstellen() {
 	}
 	$( "div.tableClass" ).toggleClass("budget-div");
 	
-	fetch('restservices/product_voorstel/' + userId)
+	fetch('restservices/product_voorstel/' + userId, {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(pvoorstellen){
 		for(const voorstel of pvoorstellen) {
@@ -72,18 +72,19 @@ function productVoorstelGoedKeuren() {
 			productPrijs = this.parentNode.parentNode.getAttribute("productPrijs");
 			productCategorie = this.parentNode.parentNode.getAttribute("productCategorie");
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
 		    		fetch("restservices/product/save/", {
 		    			method: 'POST',
-		    			body: JSON.stringify({productNaam, productPrijs, productCategorie})
+		    			body: JSON.stringify({productNaam, productPrijs, productCategorie}),
+		    			headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}
 		    		})
 		    		.then(response => response.json())
 				    .then(function(response){
 				    	if(response) {
-							fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE'})
+							fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 						    .then(function(response){		
 						    	$( "div.tableClass" ).toggleClass("budget-div");
 						    	loadProductVoorstellen();
@@ -105,11 +106,11 @@ function productVoorstelAfKeuren() {
 			gkVoorstelId = this.parentNode.parentNode.getAttribute("gkVoorstelId");
 			updateStatus = "Afgekeurd";
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
-		    		fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE'})
+		    		fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    		.then(function(response){		
 		    			$( "div.tableClass" ).toggleClass("budget-div");
 		    			loadProductVoorstellen();
@@ -189,15 +190,15 @@ function aankoopVoorstelGoedKeuren() {
 			budgetAfdeling = this.parentNode.parentNode.getAttribute("afdelingGebruiker");
 			budgetPrijs = this.parentNode.parentNode.getAttribute("totaalPrijs");
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
-		    		fetch("restservices/budget/update/aankoop_voorstel", {method: 'PUT', body: JSON.stringify({budgetAfdeling, budgetPrijs, type})})
+		    		fetch("restservices/budget/update/aankoop_voorstel", {method: 'PUT', body: JSON.stringify({budgetAfdeling, budgetPrijs, type}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 					.then(response => response.json())
 				    .then(function(response){
 				    	if(response) {
-				    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
+				    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    		.then(function(response){
 				    			console.log(response);
 				    			
@@ -220,11 +221,11 @@ function aankoopVoorstelAfKeuren() {
 			gkVoorstelId = this.parentNode.parentNode.getAttribute("gkVoorstelId");
 			updateStatus = "Afgekeurd";
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
-		    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
+		    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    		.then(function(response){
 		    			console.log(response);
 		    			loadAankoopVoorstellen();
@@ -257,7 +258,7 @@ function loadBudget() {
 		
 
 	
-	fetch('restservices/budget')
+	fetch('restservices/budget', {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(budgets){
 		var table = document.querySelector("#budgetTabel");
@@ -310,13 +311,15 @@ function budgetVoorstel() {
 		if(budgetVergroting.length !== 0) {
 			fetch("restservices/gekeurde_voorstellen/save", { 
 				method: 'POST', 
-				body: JSON.stringify({productNaam, gebruikerId})})
+				body: JSON.stringify({productNaam, gebruikerId}),
+				headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    .then(response => response.json())
 		    .then(function(response) {	
 		    	if (response !== -1) {
 			    	fetch("restservices/budget_voorstellen/save", { 
 						method: 'POST', 
-						body: JSON.stringify({budgetVergroting, budgetAfdeling, gebruikerId, budgetId, response})
+						body: JSON.stringify({budgetVergroting, budgetAfdeling, gebruikerId, budgetId, response}),
+						headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}
 					})
 					    .then(response => response.json())
 					    .then(function(myJson) {

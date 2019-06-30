@@ -12,7 +12,7 @@ function loadBudgetVoorstellen() {
 	var budgetBody = document.querySelector(".budget-div");
 	budgetBody.innerHTML = '';
 	
-	fetch('restservices/budget_voorstellen')
+	fetch('restservices/budget_voorstellen', {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(budgetVoorstellen){
 
@@ -55,15 +55,15 @@ function budgetVoorstelGoedkeuren() {
 			budgetId = this.parentNode.parentNode.getAttribute("budgetId");
 			budgetPrijs = this.parentNode.parentNode.getAttribute("budgetVergroting");
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
-		    		fetch("restservices/budget/update/budget_voorstel", {method: 'PUT', body: JSON.stringify({budgetId, budgetPrijs, type})})
+		    		fetch("restservices/budget/update/budget_voorstel", {method: 'PUT', body: JSON.stringify({budgetId, budgetPrijs, type}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 					.then(response => response.json())
 				    .then(function(response){
 				    	if(response) {
-				    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE'})
+				    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    		.then(function(response){
 				    			console.log(response);
 				    			loadBudgetVoorstellen();
@@ -85,11 +85,11 @@ function budgetVoorstelAfkeuren() {
 			updateStatus = "Goed gekeurd";
 			budgetId = this.parentNode.parentNode.getAttribute("budgetId");
 			
-			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 		    .then(function(response){
 		    	if(response) {
-		    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE'})
+		    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    		.then(function(response){
 		    			console.log(response);
 		    			loadBudgetVoorstellen();

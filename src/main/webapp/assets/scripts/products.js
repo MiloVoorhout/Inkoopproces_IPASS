@@ -54,11 +54,11 @@ function deleteButton() {
 		product.addEventListener("click", function(){
 			var id = this.parentNode.parentNode.getAttribute("productId");
 			
-			fetch('restservices/aankoop_voorstellen/products/'+id)
+			fetch('restservices/aankoop_voorstellen/products/'+id, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 			.then(function(aankoopVoorstellen){
 				if(aankoopVoorstellen.length === 0) {
-					fetch("restservices/product/delete/"+id, {method: 'DELETE'})
+					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    .then(function(response){
 				    	if(response) {
 					    	console.log(response);
@@ -82,14 +82,14 @@ function deleteButton() {
 						var updateStatus = "Product verwijderd";
 						var aankoopVoorstelId = voorstel.id;
 	
-						fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
+						fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 						.then(response => response.json())
 					    .then(function(response){
 					    	if(response) {
-							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
+							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							    .then(function(response){
 							    	if(response) {
-									    fetch("restservices/product/delete/"+id, {method: 'DELETE'})
+									    fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 									    .then(function(response){
 									    	if(response) {
 										    	console.log(response);
@@ -159,11 +159,11 @@ function editButton() {
 					categorie = editRow[2].childNodes[0].getAttribute("originalCategorie");
 				}
 				
-				fetch('restservices/aankoop_voorstellen/products/'+id)
+				fetch('restservices/aankoop_voorstellen/products/'+id, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				.then(response => response.json())
 				.then(function(aankoopVoorstellen){
 					if(aankoopVoorstellen.length === 0) {
-						fetch("restservices/product/update/", {method: 'PUT', body: JSON.stringify({id, name, price, categorie})})
+						fetch("restservices/product/update/", {method: 'PUT', body: JSON.stringify({id, name, price, categorie}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 						.then(response => response.json())
 					    .then(function(response){
 					    	if(response) {
@@ -189,11 +189,11 @@ function editButton() {
 							var aankoopVoorstelId = voorstel.id;
 							updateName = voorstel.aantal + ' ' + name
 							
-							fetch("restservices/gekeurde_voorstellen/update_product/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateName})})
+							fetch("restservices/gekeurde_voorstellen/update_product/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateName}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							.then(response => response.json())
 						    .then(function(response){
 						    	if(response) {
-						    		fetch("restservices/product/update/", {method: 'PUT', body: JSON.stringify({id, name, price, categorie})})
+						    		fetch("restservices/product/update/", {method: 'PUT', body: JSON.stringify({id, name, price, categorie}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 									.then(response => response.json())
 								    .then(function(response){
 								    	if(response) {

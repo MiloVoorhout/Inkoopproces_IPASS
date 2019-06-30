@@ -95,7 +95,6 @@ public class GekeurdeVoorstellenResource {
     @DELETE
     @Path("delete/{statusId}")
     @Produces("application/json")
-    @RolesAllowed({"Voorstel manager", "Budget manager"})
     public Response deleteStatus(@PathParam("statusId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         boolean deleteStatus = inkoopService.deleteStatus(id);
