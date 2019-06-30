@@ -21,35 +21,17 @@ function keurenButton() {
 	
 	var role = sessionStorage.getItem("rol");
 	if (role === "Voorstel manager") {
-		menuButtonBody.innerHTML += '<div class="button-div">' +
-    								'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
-    								'</div>';
+		menuButtonBody.innerHTML += '<a href="product_keuren.html"><button class="menu-button" name="keuren" value="Keuren" id="keuren">Keuren</button></a>';
     								
-    	menuButtonBody.innerHTML += '<div class="button-div">' +
-    								'<input type="submit" class="menu-button" name="product" value="Producten" id="producten">';
-    								'</div>';
+    	menuButtonBody.innerHTML += '<a href="products.html"><button class="menu-button" name="product" value="Producten" id="producten"">Producten</button></a>';
     	
     	$(".menu-content").css("margin", "6vh auto");
-    	const goToKeuren = document.querySelector('#keuren');    	
-    	goToKeuren.addEventListener('click', function() {
-    		window.location.href = "/product_keuren.html";
-    	})   
-    	
-    	const goToProducten = document.querySelector('#producten');   
-    	goToProducten.addEventListener('click', function() {
-    		window.location.href = "/products.html";
-    	})   
+
     	
 	} else if (role === "Budget manager") {
-		menuButtonBody.innerHTML += '<div class="button-div">' +
-									'<input type="submit" class="menu-button" name="keuren" value="Keuren" id="keuren">';
-									'</div>';
+		menuButtonBody.innerHTML += '<a href="budget_keuren.html"><button class="menu-button" name="product" value="Producten" id="producten"">Producten</button></a>';
 		
 		$(".menu-content").css("margin", "12vh auto");
-		const goToKeuren = document.querySelector('#keuren');							
-		goToKeuren.addEventListener('click', function() {
-			window.location.href = "/budget_keuren.html";
-		})
 	}
 }
 
