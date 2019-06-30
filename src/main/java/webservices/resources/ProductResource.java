@@ -1,5 +1,6 @@
 package webservices.resources;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -48,6 +49,7 @@ public class ProductResource {
     @POST
     @Path("/save")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public Response addProduct(String response) throws ParseException{    
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -62,6 +64,7 @@ public class ProductResource {
     @PUT
     @Path("/update")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public boolean updateProduct(String response) throws ParseException{    
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -80,6 +83,7 @@ public class ProductResource {
     @DELETE
     @Path("delete/{productId}")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public Response deleteProduct(@PathParam("productId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         boolean deleteStatus = inkoopService.delteProduct(id);

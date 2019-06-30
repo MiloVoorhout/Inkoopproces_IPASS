@@ -21,6 +21,7 @@ public class BudgetResource {
 	
     @GET
     @Produces("application/json")
+    @RolesAllowed({"Voorstel manager", "Budget manager"})
     public String getBudgets() {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -42,6 +43,7 @@ public class BudgetResource {
     @PUT
     @Path("/update/aankoop_voorstel")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public boolean updateBudgetPurchase(String response) throws ParseException{    
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -59,6 +61,7 @@ public class BudgetResource {
     @PUT
     @Path("/update/budget_voorstel")
     @Produces("application/json")
+    @RolesAllowed("Budget manager")
     public boolean updateBudgetProposal(String response) throws ParseException{    	
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();

@@ -1,5 +1,6 @@
 package webservices.resources;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -26,6 +27,7 @@ public class ProductVoorstellenResource {
     @GET
     @Path("/{userId}")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public String getProducts(@PathParam("userId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -64,6 +66,7 @@ public class ProductVoorstellenResource {
     @DELETE
     @Path("delete/{productProposalId}")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public Response deleteProductProposal(@PathParam("productProposalId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         boolean deleteStatus = inkoopService.deleteProductProposal(id);

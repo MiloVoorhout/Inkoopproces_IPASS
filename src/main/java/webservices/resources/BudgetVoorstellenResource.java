@@ -1,5 +1,6 @@
 package webservices.resources;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -23,6 +24,7 @@ public class BudgetVoorstellenResource {
 	
     @GET
     @Produces("application/json")
+    @RolesAllowed("Budget manager")
     public String getBudgetsProposals() {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -48,6 +50,7 @@ public class BudgetVoorstellenResource {
     @POST
     @Path("/save")
     @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
     public Response addBudgetProposals(String response) throws ParseException{  
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -62,6 +65,7 @@ public class BudgetVoorstellenResource {
     @DELETE
     @Path("delete/{budgetProposalId}")
     @Produces("application/json")
+    @RolesAllowed("Budget manager")
     public Response deleteBudgetProposals(@PathParam("budgetProposalId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         boolean deleteStatus = inkoopService.deleteBudgetProposals(id);

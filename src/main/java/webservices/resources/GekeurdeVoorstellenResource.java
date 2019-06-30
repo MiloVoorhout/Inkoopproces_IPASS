@@ -27,7 +27,6 @@ public class GekeurdeVoorstellenResource {
     @GET
     @Path("/{userId}")
     @Produces("application/json")
-//    @RolesAllowed("admin")
     public String getGekeurdeVoorstellen(@PathParam("userId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -64,6 +63,7 @@ public class GekeurdeVoorstellenResource {
     @PUT
     @Path("/update")
     @Produces("application/json")
+    @RolesAllowed({"Voorstel manager", "Budget manager"})
     public boolean updateGekeurdeVoorstel(String response) throws ParseException{  
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -79,6 +79,7 @@ public class GekeurdeVoorstellenResource {
     @PUT
     @Path("/update_product")
     @Produces("application/json")
+    @RolesAllowed({"Voorstel manager", "Budget manager"})
     public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
@@ -94,6 +95,7 @@ public class GekeurdeVoorstellenResource {
     @DELETE
     @Path("delete/{statusId}")
     @Produces("application/json")
+    @RolesAllowed({"Voorstel manager", "Budget manager"})
     public Response deleteStatus(@PathParam("statusId") int id) {
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         boolean deleteStatus = inkoopService.deleteStatus(id);
