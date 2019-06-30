@@ -30,8 +30,17 @@ function loadProducts() {
 			cel1.innerHTML = product.naam;
 			cel2.innerHTML = (product.prijs).toFixed(2);
 			cel3.innerHTML = product.categorie;
-			cel4.innerHTML = '<i class="fas fa-pencil-alt"></i>';
-			cel5.innerHTML = '<i class="fas fa-trash-alt"></i>';
+			cel4.innerHTML = '<i class="fas fa-pencil-alt hidden"></i>';
+			cel5.innerHTML = '<i class="fas fa-trash-alt hidden"></i>';
+		}
+		
+		if (($(window).width() > 952)) {
+			$(".rowData").each(function(){
+				$(this).hover(function(){
+					$(this).find(".fa-pencil-alt").toggleClass('hidden');
+					$(this).find(".fa-trash-alt").toggleClass('hidden');
+				})
+			})
 		}
 		
 		deleteButton();
@@ -97,7 +106,7 @@ function editButton() {
 			var tableRow = this.parentNode.parentNode.childNodes;
 			
 			tableRow[0].innerHTML = '<input value="' + tableRow[0].innerText + '" id="productNaam" originalName="' + tableRow[0].innerText +'">'
-			tableRow[1].innerHTML = '<input type="number" step="0.01" value="€ ' + parseFloat(tableRow[1].innerText) + '" id="productPrijs" originalPrice="' + tableRow[1].innerText + '">'
+			tableRow[1].innerHTML = '<input type="number" step="0.01" value="' + parseFloat(tableRow[1].innerText) + '" id="productPrijs" originalPrice="' + tableRow[1].innerText + '">'
 			tableRow[2].innerHTML = '<input value="' + tableRow[2].innerText + '" id="productCategorie" originalCategorie="' + tableRow[2].innerText + '">'
 			tableRow[3].innerHTML = "<i class='fas fa-check'></i>"
 			
@@ -159,7 +168,6 @@ function editButton() {
 								    .then(function(response){
 								    	if(response) {
 											console.log(response);
-											loadProducts();
 								    		var toastUp = document.getElementById("toastUpdate");
 											toastUp.className = "show";
 											setTimeout(function(){ 
@@ -175,7 +183,8 @@ function editButton() {
 									})
 								}
 						    })
-						}	
+						}
+						loadProducts();
 					} else {
 						var toastUp = document.getElementById("toastFout");
 						toastUp.className = "show";
@@ -187,5 +196,24 @@ function editButton() {
 				})
 			});
 		});
+	}
+}
+
+function tableFilter() {
+	var productInput = document.querySelector(".productInput");
+	var inputToUpperCase = productInput.value.toUpperCase();
+	var productTable = document.getElementById("productTabel");
+	var tr = productTable.getElementsByTagName("tr");
+
+	for (i = 0; i < tr.length; i++) {
+		var td = tr[i].getElementsByTagName("td")[0];
+		if (td) {
+			var tdValue = td.innerText;
+			if (tdValue.toUpperCase().indexOf(inputToUpperCase) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
 	}
 }

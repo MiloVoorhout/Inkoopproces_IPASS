@@ -15,7 +15,9 @@ function loadProductVoorstellen() {
 	var budget = document.querySelector(".budget-div");
 	var userId = sessionStorage.getItem("id");
 	
-	budget.innerHTML = '';
+	if(budget != null) {
+		budget.innerHTML = '';
+	}
 	productVoorstelBody.innerHTML = '';
 		
 	if (!($(window).width() < 960)) {
@@ -82,7 +84,8 @@ function productVoorstelGoedKeuren() {
 				    .then(function(response){
 				    	if(response) {
 							fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE'})
-						    .then(function(response){						    	
+						    .then(function(response){		
+						    	$( "div.tableClass" ).toggleClass("budget-div");
 						    	loadProductVoorstellen();
 						    })
 				    	}
@@ -107,7 +110,8 @@ function productVoorstelAfKeuren() {
 		    .then(function(response){
 		    	if(response) {
 		    		fetch("restservices/product_voorstel/delete/"+productVoorstelId, {method: 'DELETE'})
-		    		.then(function(response){						    	
+		    		.then(function(response){		
+		    			$( "div.tableClass" ).toggleClass("budget-div");
 		    			loadProductVoorstellen();
 				    })
 		    	}
@@ -152,6 +156,9 @@ function loadAankoopVoorstellen() {
 			 				'<label>Totaal prijs: € ' + (aVoorstel.totaalPrijs).toFixed(2) + '</label>' +
 			 			'</div>' +
 			 			'<div>' +
+		 				'<label>Afdeling: ' + aVoorstel.afdeling + '</label>' +
+		 			'</div>' +
+			 			'<div>' +
 			 				'<label>Reden: ' + aVoorstel.reden + '</label>' +
 			 			'</div>' +
 			 		'</div>' +
@@ -185,7 +192,6 @@ function aankoopVoorstelGoedKeuren() {
 			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus})})
 			.then(response => response.json())
 		    .then(function(response){
-		    	console.log(response.naam);
 		    	if(response) {
 		    		fetch("restservices/budget/update/aankoop_voorstel", {method: 'PUT', body: JSON.stringify({budgetAfdeling, budgetPrijs, type})})
 					.then(response => response.json())
@@ -194,6 +200,7 @@ function aankoopVoorstelGoedKeuren() {
 				    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE'})
 				    		.then(function(response){
 				    			console.log(response);
+				    			
 				    			loadAankoopVoorstellen();
 						    })
 				    	}
