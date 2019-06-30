@@ -79,7 +79,7 @@ function saveProductVoorstel() {
 		    .then(response => response.json())
 		    .then(function(response) {	
 		    	if (response !== -1) {
-			    	fetch("/inkoop/restservices/product_voorstel/save", { 
+			    	fetch("restservices/product_voorstel/save", { 
 						method: 'POST', 
 						body: JSON.stringify({productNaam, productPrijs, productCategorie, gebruikerId, response})})
 					    .then(response => response.json())
