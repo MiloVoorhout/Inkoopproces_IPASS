@@ -4,7 +4,7 @@ function initPage() {
 	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
    
 	goBack.addEventListener('click', function() {
-		window.location.href = "/inkoop/menu.html";
+		window.location.href = "/menu.html";
 	})
    
 	loadProductVoorstellen(); 

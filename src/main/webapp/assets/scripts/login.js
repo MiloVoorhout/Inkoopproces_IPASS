@@ -28,7 +28,7 @@ function login() {
                 sessionStorage.setItem("sessionToken", response.JWT);
                 sessionStorage.setItem("id", response.id);
                 sessionStorage.setItem("rol", response.role);
-                window.location.href = "/inkoop/menu.html";
+                window.location.href = "/menu.html";
             })
             .catch(error => console.log(error));
     });

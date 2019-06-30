@@ -25,7 +25,7 @@ function initPage() {
 	})
 	
 	goBack.addEventListener('click', function() {
-		window.location.href = "/inkoop/menu.html";
+		window.location.href = "/menu.html";
 	})
 	
 	loadProducts();

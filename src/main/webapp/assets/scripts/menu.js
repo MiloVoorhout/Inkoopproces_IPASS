@@ -4,11 +4,11 @@ function initPage() {
 	
 	goToAankoop.addEventListener('click', function() {
 		console.log("aankoop");
-		window.location.href = "/inkoop/aankoop.html";
+		window.location.href = "/aankoop.html";
 	})
 	
 	goToStatus.addEventListener('click', function() {
-		window.location.href = "/inkoop/status.html";
+		window.location.href = "/status.html";
 	})
 	
 	keurenButton();
@@ -32,12 +32,12 @@ function keurenButton() {
     	$(".menu-content").css("margin", "6vh auto");
     	const goToKeuren = document.querySelector('#keuren');    	
     	goToKeuren.addEventListener('click', function() {
-    		window.location.href = "/inkoop/product_keuren.html";
+    		window.location.href = "/product_keuren.html";
     	})   
     	
     	const goToProducten = document.querySelector('#producten');   
     	goToProducten.addEventListener('click', function() {
-    		window.location.href = "/inkoop/products.html";
+    		window.location.href = "/products.html";
     	})   
     	
 	} else if (role === "Budget manager") {
@@ -48,7 +48,7 @@ function keurenButton() {
 		$(".menu-content").css("margin", "12vh auto");
 		const goToKeuren = document.querySelector('#keuren');							
 		goToKeuren.addEventListener('click', function() {
-			window.location.href = "/inkoop/budget_keuren.html";
+			window.location.href = "/budget_keuren.html";
 		})
 	}
 }
@@ -57,6 +57,6 @@ function uitlogButton() {
 	const uitloggen = document.querySelector(".uitlog-button");
 	uitloggen.addEventListener('click', function() {
 		sessionStorage.clear();		
-		window.location.href = "/inkoop/";
+		window.location.href = "/index.html";
 	})
 }
