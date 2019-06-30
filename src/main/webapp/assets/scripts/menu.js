@@ -21,9 +21,13 @@ function keurenButton() {
 	
 	var role = sessionStorage.getItem("rol");
 	if (role === "Voorstel manager") {
-		menuButtonBody.innerHTML += '<a href="product_keuren.html"><button class="menu-button" name="keuren" value="Keuren" id="keuren">Keuren</button></a>';
-    								
-    	menuButtonBody.innerHTML += '<a href="products.html"><button class="menu-button" name="product" value="Producten" id="producten"">Producten</button></a>';
+		menuButtonBody.innerHTML += '<div class="button-div">' +
+										'<a href="product_keuren.html"><button class="menu-button" name="keuren" value="Keuren" id="keuren">Keuren</button></a>' +
+    								'</div>';
+		
+    	menuButtonBody.innerHTML += '<div class="button-div">' +
+    									'<a href="products.html"><button class="menu-button" name="product" value="Producten" id="producten"">Producten</button></a>' +
+    								'</div>';
     	
     	$(".menu-content").css("margin", "6vh auto");
 

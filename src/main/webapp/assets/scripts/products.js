@@ -135,10 +135,10 @@ function editButton() {
 			var id = this.parentNode.parentNode.getAttribute("productId");
 			var tableRow = this.parentNode.parentNode.childNodes;
 			
-			tableRow[0].innerHTML = '<input value="' + tableRow[0].innerText + '" id="productNaam" originalName="' + tableRow[0].innerText +'">'
-			tableRow[1].innerHTML = '<input type="number" step="0.01" value="' + parseFloat(tableRow[1].innerText) + '" id="productPrijs" originalPrice="' + tableRow[1].innerText + '">'
-			tableRow[2].innerHTML = '<input value="' + tableRow[2].innerText + '" id="productCategorie" originalCategorie="' + tableRow[2].innerText + '">'
-			tableRow[3].innerHTML = "<i class='fas fa-check'></i>"
+			tableRow[0].innerHTML = '<input value="' + tableRow[0].innerText + '" id="productNaam" originalName="' + tableRow[0].innerText +'">';
+			tableRow[1].innerHTML = '<input type="number" step="0.01" value="' + parseFloat(tableRow[1].innerText) + '" id="productPrijs" originalPrice="' + tableRow[1].innerText + '">';
+			tableRow[2].innerHTML = '<input value="' + tableRow[2].innerText + '" id="productCategorie" originalCategorie="' + tableRow[2].innerText + '">';
+			tableRow[3].innerHTML = "<i class='fas fa-check'></i>";
 			
 			var editSave = document.querySelector(".fa-check");
 			editSave.addEventListener("click", function(){

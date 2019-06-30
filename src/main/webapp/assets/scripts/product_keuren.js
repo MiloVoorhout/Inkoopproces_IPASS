@@ -137,7 +137,7 @@ function loadAankoopVoorstellen() {
 	}
 	
 	
-	fetch('restservices/aankoop_voorstellen/'+userId)
+	fetch('restservices/aankoop_voorstellen/'+userId, {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(aankoopVoorstellen){
 		for(const aVoorstel of aankoopVoorstellen) {
