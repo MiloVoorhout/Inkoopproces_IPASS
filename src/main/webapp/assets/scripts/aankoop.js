@@ -73,7 +73,7 @@ function saveProductVoorstel() {
 		var gebruikerId = sessionStorage.getItem("id");
 		
 		if(productPrijs.length !== 0 && productNaam.length !== 0 && productCategorie.length !== 0) {
-			fetch("/inkoop/restservices/gekeurde_voorstellen/save", { 
+			fetch("restservices/gekeurde_voorstellen/save", { 
 				method: 'POST', 
 				body: JSON.stringify({productNaam, gebruikerId})})
 		    .then(response => response.json())
@@ -138,13 +138,13 @@ function saveAankoopVoorstel() {
 		const checkReden = $("#productReden").val();
 		
 		if(checkAantal !== false && productAantal.length !== 0 && checkReden.length !== 0 && productId !== null) {
-			fetch("/inkoop/restservices/gekeurde_voorstellen/save", { 
+			fetch("restservices/gekeurde_voorstellen/save", { 
 				method: 'POST', 
 				body: JSON.stringify({productNaam, gebruikerId})})
 		    .then(response => response.json())
 		    .then(function(response) {	
 		    	if (response !== -1) {
-			    	fetch("/inkoop/restservices/aankoop_voorstellen/save", { 
+			    	fetch("restservices/aankoop_voorstellen/save", { 
 						method: 'POST', 
 						body: JSON.stringify({productAantal, aankoopReden, productId, gebruikerId, response})
 					})

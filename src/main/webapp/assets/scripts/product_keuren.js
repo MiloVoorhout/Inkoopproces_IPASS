@@ -308,13 +308,13 @@ function budgetVoorstel() {
 		const warning = document.querySelector(".warningModal");
 		
 		if(budgetVergroting.length !== 0) {
-			fetch("/inkoop/restservices/gekeurde_voorstellen/save", { 
+			fetch("restservices/gekeurde_voorstellen/save", { 
 				method: 'POST', 
 				body: JSON.stringify({productNaam, gebruikerId})})
 		    .then(response => response.json())
 		    .then(function(response) {	
 		    	if (response !== -1) {
-			    	fetch("/inkoop/restservices/budget_voorstellen/save", { 
+			    	fetch("restservices/budget_voorstellen/save", { 
 						method: 'POST', 
 						body: JSON.stringify({budgetVergroting, budgetAfdeling, gebruikerId, budgetId, response})
 					})
