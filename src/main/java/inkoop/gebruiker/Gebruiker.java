@@ -2,43 +2,43 @@ package inkoop.gebruiker;
 
 public class Gebruiker {
 	private int id;
-	private String gebruikersnaam;
-	private String wachtwoord;
-	private String voornaam;
-	private String tussenvoegsel;
-	private String achternaam;
-	private int afdeling;
-	private String rol;
+	private String username;
+	private String password;
+	private String firstname;
+	private String insertion;
+	private String lastname;
+	private int department;
+	private String role;
 	
-	public Gebruiker (String gebruikersnaam, String wachtwoord, String voornaam, String tussenvoegsel, String achternaam, int afdeling, String rol ) {
-		this.gebruikersnaam = gebruikersnaam;
-		this.wachtwoord = wachtwoord;
-		this.voornaam = voornaam;
-		this.tussenvoegsel = tussenvoegsel;
-		this.achternaam = achternaam;
-		this.afdeling = afdeling;
-		this.rol = rol;
+	public Gebruiker (String username, String password, String firstname, String insertion, String lastname, int department, String role ) {
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.insertion = insertion;
+		this.lastname = lastname;
+		this.department = department;
+		this.role = role;
 	}
 	
-	public Gebruiker (String gebruikersnaam, String wachtwoord, String voornaam, String achternaam, int afdeling, String rol ) {
-		this.gebruikersnaam = gebruikersnaam;
-		this.wachtwoord = wachtwoord;
-		this.voornaam = voornaam;
-		this.achternaam = achternaam;
-		this.afdeling = afdeling;
-		this.rol = rol;
+	public Gebruiker (String username, String password, String firstname, String lastname, int department, String role ) {
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.department = department;
+		this.role = role;
 	}
 	
-	public Gebruiker (int id, String voornaam, String achternaam, int afdeling) {
+	public Gebruiker (int id, String firstname, String lastname, int department) {
 		this.id = id;
-		this.voornaam = voornaam;
-		this.achternaam = achternaam;
-		this.afdeling = afdeling;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.department = department;
 	}
 	
-	public Gebruiker (int id, String rol ) {
+	public Gebruiker (int id, String role ) {
 		this.id = id;
-		this.rol = rol;
+		this.role = role;
 	}
 
 	public int getId() {
@@ -48,53 +48,53 @@ public class Gebruiker {
 		this.id = id;
 	}
 	
-	public String getGebruikersnaam() {
-		return gebruikersnaam;
+	public String getUsername() {
+		return username;
 	}
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
-	}
-
-	public String getWachtwoord() {
-		return wachtwoord;
-	}
-	public void setWachtwoord(String wachtwoord) {
-		this.wachtwoord = wachtwoord;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getVoornaam() {
-		return voornaam;
+	public String getPassword() {
+		return password;
 	}
-	public void setVoornaam(String voornaam) {
-		this.voornaam = voornaam;
-	}
-
-	public String getTussenvoegsel() {
-		return tussenvoegsel;
-	}
-	public void setTussenvoegsel(String tussenvoegsel) {
-		this.tussenvoegsel = tussenvoegsel;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getAchternaam() {
-		return achternaam;
+	public String getFirstName() {
+		return firstname;
 	}
-	public void setAchternaam(String achternaam) {
-		this.achternaam = achternaam;
-	}
-
-	public int getAfdeling() {
-		return afdeling;
-	}
-	public void setAfdeling(int afdeling) {
-		this.afdeling = afdeling;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getInsertion() {
+		return insertion;
 	}
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setInsertion(String insertion) {
+		this.insertion = insertion;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public int getDepartment() {
+		return department;
+	}
+	public void setDepartment(int department) {
+		this.department = department;
+	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

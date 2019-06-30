@@ -24,7 +24,7 @@ import inkoop.gekeurdevoorstellen.GekeurdeVoorstellenDaoImpl;
 
 @Path("/gekeurde_voorstellen")
 public class GekeurdeVoorstellenResource {
-	private GekeurdeVoorstellenDaoImpl gekeurdeVoorstelleDao = new GekeurdeVoorstellenDaoImpl();
+	private GekeurdeVoorstellenDaoImpl approvedProposalDao = new GekeurdeVoorstellenDaoImpl();
 	
     @GET
     @Path("/{userId}")
@@ -33,13 +33,13 @@ public class GekeurdeVoorstellenResource {
     public String getGekeurdeVoorstellen(@PathParam("userId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (GekeurdeVoorstellen gekeurdeVoorstel : gekeurdeVoorstelleDao.findAll(id)) {
+        for (GekeurdeVoorstellen approvedProposal : approvedProposalDao.findAll(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
-            job.add("id", gekeurdeVoorstel.getId());
-            job.add("product", gekeurdeVoorstel.getProduct());
-            job.add("status", gekeurdeVoorstel.getStatus());
-            job.add("gebruikers_id ", gekeurdeVoorstel.getGebruikers_id());
+            job.add("id", approvedProposal.getId());
+            job.add("product", approvedProposal.getProduct());
+            job.add("status", approvedProposal.getStatus());
+            job.add("gebruikers_id ", approvedProposal.getUser_id());
 
             jab.add(job);
         }
@@ -55,10 +55,10 @@ public class GekeurdeVoorstellenResource {
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	GekeurdeVoorstellen gekeurdeVoorstel = new GekeurdeVoorstellen(json.get("productNaam").toString(), "In afwachting", Integer.parseInt(json.get("gebruikerId").toString()));
+    	GekeurdeVoorstellen approvedProposal = new GekeurdeVoorstellen(json.get("productNaam").toString(), "In afwachting", Integer.parseInt(json.get("gebruikerId").toString()));
 
-        int saveProductVoorstel = gekeurdeVoorstelleDao.save(gekeurdeVoorstel);
-        return saveProductVoorstel;
+        int saveApprovedProposal = approvedProposalDao.save(approvedProposal);
+        return saveApprovedProposal;
     }
     
     @PUT
@@ -68,11 +68,11 @@ public class GekeurdeVoorstellenResource {
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	int gekeurdeVoorstelId = Integer.parseInt(json.get("gkVoorstelId").toString());
-    	String gekeurdeVoorstelStatus = json.get("updateStatus").toString();
+    	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
+    	String approvedProposalStatus = json.get("updateStatus").toString();
 
-        boolean updateGekeurdeVoorstel = gekeurdeVoorstelleDao.update(gekeurdeVoorstelId, gekeurdeVoorstelStatus);
-        return updateGekeurdeVoorstel;
+        boolean updateApprovedProposal = approvedProposalDao.update(approvedProposalId, approvedProposalStatus);
+        return updateApprovedProposal;
     }
     
     @PUT
@@ -82,10 +82,10 @@ public class GekeurdeVoorstellenResource {
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	int gekeurdeVoorstelId = Integer.parseInt(json.get("gkVoorstelId").toString());
-    	String gekeurdeVoorstelName = json.get("updateName").toString();
+    	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
+    	String approvedProposalName = json.get("updateName").toString();
 
-        boolean updateName = gekeurdeVoorstelleDao.updateProduct(gekeurdeVoorstelId, gekeurdeVoorstelName);
+        boolean updateName = approvedProposalDao.updateProduct(approvedProposalId, approvedProposalName);
         return updateName;
     }
     
@@ -93,7 +93,7 @@ public class GekeurdeVoorstellenResource {
     @Path("delete/{statusId}")
     @Produces("application/json")
     public Response deleteStatus(@PathParam("statusId") int id) {
-        boolean deleteStatus = gekeurdeVoorstelleDao.delete(id);
+        boolean deleteStatus = approvedProposalDao.delete(id);
         return Response.ok(deleteStatus).build();
     }
 }

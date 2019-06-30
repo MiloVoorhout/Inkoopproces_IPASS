@@ -22,7 +22,7 @@ import inkoop.productvoorstel.ProductVoorstelDaoImpl;
 
 @Path("/product_voorstel")
 public class ProductVoorstellenResource {
-	private ProductVoorstelDaoImpl productVoorstelDao = new ProductVoorstelDaoImpl();
+	private ProductVoorstelDaoImpl productProposalDao = new ProductVoorstelDaoImpl();
 	
     @GET
     @Path("/{userId}")
@@ -30,15 +30,15 @@ public class ProductVoorstellenResource {
     public String getProducts(@PathParam("userId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (ProductVoorstel productVoorstel : productVoorstelDao.findAll(id)) {
+        for (ProductVoorstel productProposal : productProposalDao.findAll(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
-            job.add("id", productVoorstel.getId());
-            job.add("naam", productVoorstel.getNaam());
-            job.add("prijs", productVoorstel.getPrijs());
-            job.add("categorie", productVoorstel.getCategorie());
-            job.add("gebruikers_id", productVoorstel.getGebruikers_id());
-            job.add("gk_id", productVoorstel.getGk_voorstel_id());
+            job.add("id", productProposal.getId());
+            job.add("naam", productProposal.getName());
+            job.add("prijs", productProposal.getPrice());
+            job.add("categorie", productProposal.getCategory());
+            job.add("gebruikers_id", productProposal.getUser_id());
+            job.add("gk_id", productProposal.getGk_proposal_id());
 
             jab.add(job);
         }
@@ -50,21 +50,21 @@ public class ProductVoorstellenResource {
     @POST
     @Path("/save")
     @Produces("application/json")
-    public Response addProductVoorstel(String response) throws ParseException{    	
+    public Response addProductProposal(String response) throws ParseException{    	
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	ProductVoorstel productVoorstel = new ProductVoorstel(json.get("productNaam").toString(), Double.parseDouble(json.get("productPrijs").toString()), json.get("productCategorie").toString(), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
+    	ProductVoorstel productProposal = new ProductVoorstel(json.get("productNaam").toString(), Double.parseDouble(json.get("productPrijs").toString()), json.get("productCategorie").toString(), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
-        boolean saveProductVoorstel = productVoorstelDao.save(productVoorstel);
-        return Response.ok(saveProductVoorstel).build();
+        boolean saveProductProposal = productProposalDao.save(productProposal);
+        return Response.ok(saveProductProposal).build();
     }
     
     @DELETE
-    @Path("delete/{productVoorstelId}")
+    @Path("delete/{productProposalId}")
     @Produces("application/json")
-    public Response deleteProductVoorstel(@PathParam("productVoorstelId") int id) {
-        boolean deleteStatus = productVoorstelDao.delete(id);
+    public Response deleteProductProposal(@PathParam("productProposalId") int id) {
+        boolean deleteStatus = productProposalDao.delete(id);
 
         return Response.ok(deleteStatus).build();
     }

@@ -23,26 +23,26 @@ import inkoop.productvoorstel.ProductVoorstel;
 
 @Path("/aankoop_voorstellen")
 public class AankoopVoorstellenResource {
-	private AankoopVoorstellenDaoImpl aankoopVoorstelDao = new AankoopVoorstellenDaoImpl();
+	private AankoopVoorstellenDaoImpl purchaseProposalDao = new AankoopVoorstellenDaoImpl();
 	
     @GET
     @Path("/{userId}")
     @Produces("application/json")
-    public String getAankoopvoorstel(@PathParam("userId") int id) {
+    public String getPurchaseProposal(@PathParam("userId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (AankoopVoorstellen aankoopVoorstel : aankoopVoorstelDao.findAll(id)) {
+        for (AankoopVoorstellen purchaseProposals : purchaseProposalDao.findAll(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
-            job.add("id", aankoopVoorstel.getId());
-            job.add("aantal", aankoopVoorstel.getAantal());
-            job.add("reden", aankoopVoorstel.getReden());
-            job.add("product_id", aankoopVoorstel.getProduct_id());
-            job.add("gebruikers_id", aankoopVoorstel.getGebruikers_id());
-            job.add("gk_id", aankoopVoorstel.getGk_voorstel_id());
-            job.add("naam", aankoopVoorstel.getNaam());
-            job.add("totaalPrijs", (aankoopVoorstel.getAantal() * aankoopVoorstel.getPrijs()));
-            job.add("afdeling", aankoopVoorstel.getAfdeling());
+            job.add("id", purchaseProposals.getId());
+            job.add("aantal", purchaseProposals.getAmount());
+            job.add("reden", purchaseProposals.getReason());
+            job.add("product_id", purchaseProposals.getProduct_id());
+            job.add("gebruikers_id", purchaseProposals.getUser_id());
+            job.add("gk_id", purchaseProposals.getGk_proposal_id());
+            job.add("naam", purchaseProposals.getPrice()); 	
+            job.add("totaalPrijs", (purchaseProposals.getAmount() * purchaseProposals.getPrice()));
+            job.add("afdeling", purchaseProposals.getDepartment());
 
             jab.add(job);
         }
@@ -54,16 +54,16 @@ public class AankoopVoorstellenResource {
     @GET
     @Path("/products/{productId}")
     @Produces("application/json")
-    public String getAankoopvoorstelProductId(@PathParam("productId") int id) {
+    public String getPurchaseProposalId(@PathParam("productId") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (AankoopVoorstellen aankoopVoorstel : aankoopVoorstelDao.findByProductId(id)) {
+        for (AankoopVoorstellen purchaseProposal : purchaseProposalDao.findByProductId(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
-            job.add("id", aankoopVoorstel.getId());
-            job.add("aantal", aankoopVoorstel.getAantal());
-            job.add("gk_id", aankoopVoorstel.getGk_voorstel_id());
-            job.add("naam", aankoopVoorstel.getNaam());
+            job.add("id", purchaseProposal.getId());
+            job.add("aantal", purchaseProposal.getAmount());
+            job.add("gk_id", purchaseProposal.getGk_proposal_id());
+            job.add("naam", purchaseProposal.getName());
 
             jab.add(job);
         }
@@ -75,21 +75,21 @@ public class AankoopVoorstellenResource {
     @POST
     @Path("/save")
     @Produces("application/json")
-    public Response addAankoopVoorstel(String response) throws ParseException{    	
+    public Response addPurchaseProposal(String response) throws ParseException{    	
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	AankoopVoorstellen aankoopVoorstel = new AankoopVoorstellen(Integer.parseInt(json.get("productAantal").toString()), json.get("aankoopReden").toString(), Integer.parseInt(json.get("productId").toString()), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
+    	AankoopVoorstellen purchaseProposal = new AankoopVoorstellen(Integer.parseInt(json.get("productAantal").toString()), json.get("aankoopReden").toString(), Integer.parseInt(json.get("productId").toString()), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
-        boolean saveProductVoorstel = aankoopVoorstelDao.save(aankoopVoorstel);
-        return Response.ok(saveProductVoorstel).build();
+        boolean savePurchaseProposal = purchaseProposalDao.save(purchaseProposal);
+        return Response.ok(savePurchaseProposal).build();
     }
     
     @DELETE
-    @Path("delete/{aankoopVoorstelId}")
+    @Path("delete/{PurchaseProposalId}")
     @Produces("application/json")
-    public Response deleteAankoopVoorstel(@PathParam("aankoopVoorstelId") int id) {
-        boolean deleteStatus = aankoopVoorstelDao.delete(id);
+    public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
+        boolean deleteStatus = purchaseProposalDao.delete(id);
 
         return Response.ok(deleteStatus).build();
     }

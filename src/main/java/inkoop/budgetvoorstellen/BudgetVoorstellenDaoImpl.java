@@ -15,7 +15,7 @@ public class BudgetVoorstellenDaoImpl extends PostgresBaseDao implements BudgetV
 
 
 	public List<BudgetVoorstellen> findAll() {
-		List<BudgetVoorstellen> budgetVoorstellen = new ArrayList<>();
+		List<BudgetVoorstellen> budgetProposal = new ArrayList<>();
 
         try {
             Statement stmt = conn.createStatement();
@@ -23,7 +23,7 @@ public class BudgetVoorstellenDaoImpl extends PostgresBaseDao implements BudgetV
 
             while (results.next()) {
 
-            	budgetVoorstellen.add(new BudgetVoorstellen(
+            	budgetProposal.add(new BudgetVoorstellen(
                 		results.getInt("id"),
                 		results.getDouble("vergroting"),
                 		results.getInt("afdeling"),
@@ -39,18 +39,18 @@ public class BudgetVoorstellenDaoImpl extends PostgresBaseDao implements BudgetV
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return budgetVoorstellen;
+        return budgetProposal;
 	}
 
-	public Boolean save(BudgetVoorstellen budgetVoorstel) {
+	public Boolean save(BudgetVoorstellen budgetProposal) {
         try {
             String saveQuery = "INSERT INTO budget_voorstellen(vergroting, afdeling, gebruikers_id, budget_id, gk_voorstel_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement save = conn.prepareStatement(saveQuery);
-            save.setDouble(1, budgetVoorstel.getVergroting());
-            save.setInt(2, budgetVoorstel.getAfdeling());
-            save.setInt(3, budgetVoorstel.getGebruikers_id());
-            save.setInt(4, budgetVoorstel.getBudget_id());
-            save.setInt(5, budgetVoorstel.getGk_voorstel_id());
+            save.setDouble(1, budgetProposal.getIncrease());
+            save.setInt(2, budgetProposal.getDepartment());
+            save.setInt(3, budgetProposal.getUser_id());
+            save.setInt(4, budgetProposal.getBudget_id());
+            save.setInt(5, budgetProposal.getGk_proposal_id());
             save.executeUpdate();
 
             return true;

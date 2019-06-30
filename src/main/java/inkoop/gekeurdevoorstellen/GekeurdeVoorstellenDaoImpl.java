@@ -41,13 +41,13 @@ public class GekeurdeVoorstellenDaoImpl extends PostgresBaseDao implements Gekeu
 	}
 	
     //Using prepared statements for safety
-    public int save(GekeurdeVoorstellen gekeurdeVoorstellen) {
+    public int save(GekeurdeVoorstellen approvedProposals) {
         try {
             String saveQuery = "INSERT INTO gekeurde_voorstellen(product, status, gebruikers_id) VALUES (?, ?, ?) RETURNING id";
             PreparedStatement save = conn.prepareStatement(saveQuery);
-            save.setString(1, gekeurdeVoorstellen.getProduct());
-            save.setString(2, gekeurdeVoorstellen.getStatus());
-            save.setInt(3, gekeurdeVoorstellen.getGebruikers_id());
+            save.setString(1, approvedProposals.getProduct());
+            save.setString(2, approvedProposals.getStatus());
+            save.setInt(3, approvedProposals.getUser_id());
             ResultSet result = save.executeQuery();
             
             result.next();

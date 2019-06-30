@@ -4,19 +4,19 @@ public class GekeurdeVoorstellen {
 	private int id;
 	private String product;
 	private String status;
-	private int gebruikers_id;
+	private int user_id;
 	
-	public GekeurdeVoorstellen(int id, String product, String status, int gebruikers_id) {
+	public GekeurdeVoorstellen(int id, String product, String status, int user_id) {
 		this.id = id;
 		this.product = product;
 		this.status = status;
-		this.gebruikers_id = gebruikers_id;
+		this.user_id = user_id;
 	}
 	
-	public GekeurdeVoorstellen(String product, String status, int gebruikers_id) {
+	public GekeurdeVoorstellen(String product, String status, int user_id) {
 		this.product = product;
 		this.status = status;
-		this.gebruikers_id = gebruikers_id;
+		this.user_id = user_id;
 	}
 
 	public int getId() {
@@ -43,12 +43,12 @@ public class GekeurdeVoorstellen {
 		this.status = status;
 	}
 
-	public int getGebruikers_id() {
-		return gebruikers_id;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setGebruikers_id(int gebruikers_id) {
-		this.gebruikers_id = gebruikers_id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	
 	

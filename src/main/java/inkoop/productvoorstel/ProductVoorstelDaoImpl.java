@@ -14,17 +14,17 @@ public class ProductVoorstelDaoImpl extends PostgresBaseDao implements ProductVo
     private Connection conn = super.getConnection();	
 	
 	public List<ProductVoorstel> findAll(int id) {
-		List<ProductVoorstel> product_voorstellen = new ArrayList<>();
+		List<ProductVoorstel> product_proposal = new ArrayList<>();
 
         try {
             String getQuery = "SELECT * FROM product_voorstel WHERE gebruikers_id != ? ORDER BY naam";
-            PreparedStatement getProductVoorstellen = conn.prepareStatement(getQuery);
-            getProductVoorstellen.setInt(1,id);
-            ResultSet results = getProductVoorstellen.executeQuery();
+            PreparedStatement getProductProposal = conn.prepareStatement(getQuery);
+            getProductProposal.setInt(1,id);
+            ResultSet results = getProductProposal.executeQuery();
             
             while (results.next()) {
 
-            	product_voorstellen.add(new ProductVoorstel(
+            	product_proposal.add(new ProductVoorstel(
                         results.getInt("id"),
                         results.getString("naam"),
                         results.getDouble("prijs"),
@@ -35,23 +35,23 @@ public class ProductVoorstelDaoImpl extends PostgresBaseDao implements ProductVo
             }
 
             results.close();
-            getProductVoorstellen.close();
+            getProductProposal.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return product_voorstellen;
+        return product_proposal;
 	}
 	
     //Using prepared statements for safety
-    public Boolean save(ProductVoorstel productVoorstel) {
+    public Boolean save(ProductVoorstel productProposal) {
         try {
             String saveQuery = "INSERT INTO product_voorstel(naam, prijs, categorie, gebruikers_id, gk_voorstel_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement save = conn.prepareStatement(saveQuery);
-            save.setString(1, productVoorstel.getNaam());
-            save.setDouble(2, productVoorstel.getPrijs());
-            save.setString(3, productVoorstel.getCategorie());
-            save.setInt(4, productVoorstel.getGebruikers_id());
-            save.setInt(5, productVoorstel.getGk_voorstel_id());
+            save.setString(1, productProposal.getName());
+            save.setDouble(2, productProposal.getPrice());
+            save.setString(3, productProposal.getCategory());
+            save.setInt(4, productProposal.getUser_id());
+            save.setInt(5, productProposal.getGk_proposal_id());
             save.executeUpdate();
 
             save.close();

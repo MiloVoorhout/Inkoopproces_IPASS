@@ -55,9 +55,7 @@ function deleteStatus() {
 			statusId = this.parentNode.parentNode.getAttribute("statusId");
 			
 			fetch("restservices/gekeurde_voorstellen/delete/"+statusId, {method: 'DELETE'})
-		    .then(function(response){
-		    	console.log(response);
-		    	
+		    .then(function(response){		    	
 		    	loadStatus();
 		    })
 		});

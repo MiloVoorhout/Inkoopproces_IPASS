@@ -15,17 +15,17 @@ public class AankoopVoorstellenDaoImpl extends PostgresBaseDao implements Aankoo
 
 
 	public List<AankoopVoorstellen> findAll(int id) {
-		List<AankoopVoorstellen> aankoopVoorstellen = new ArrayList<>();
-
+		List<AankoopVoorstellen> purchaseProposals = new ArrayList<>();
+		
         try {
             String getQuery = "Select a.*, p.naam, p.prijs, g.afdeling FROM aankoop_voorstellen a JOIN product p ON p.id = a.product_id JOIN gebruiker g ON g.id = a.gebruikers_id WHERE a.gebruikers_id != ?";
-            PreparedStatement getAankoopVoorstellen = conn.prepareStatement(getQuery);
-            getAankoopVoorstellen.setInt(1,id);
-            ResultSet results = getAankoopVoorstellen.executeQuery();
+            PreparedStatement getPurchaseProposals = conn.prepareStatement(getQuery);
+            getPurchaseProposals.setInt(1,id);
+            ResultSet results = getPurchaseProposals.executeQuery();
             
             while (results.next()) {
 
-            	aankoopVoorstellen.add(new AankoopVoorstellen(
+            	purchaseProposals.add(new AankoopVoorstellen(
                 		results.getInt("id"),
                 		results.getInt("aantal"),
                 		results.getString("reden"),
@@ -39,25 +39,25 @@ public class AankoopVoorstellenDaoImpl extends PostgresBaseDao implements Aankoo
             }
 
             results.close();
-            getAankoopVoorstellen.close();
+            getPurchaseProposals.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return aankoopVoorstellen;
+        return purchaseProposals;
 	}
 	
 	public List<AankoopVoorstellen> findByProductId(int id) {
-		List<AankoopVoorstellen> aankoopVoorstellen = new ArrayList<>();
+		List<AankoopVoorstellen> purchaseProposals = new ArrayList<>();
 		
         try {
             String getQuery = "Select a.*, p.naam FROM aankoop_voorstellen a JOIN product p ON p.id = a.product_id WHERE a.product_id = ?";
-            PreparedStatement getAankoopVoorstellen = conn.prepareStatement(getQuery);
-            getAankoopVoorstellen.setInt(1,id);
-            ResultSet results = getAankoopVoorstellen.executeQuery();
+            PreparedStatement getPurchaseProposals = conn.prepareStatement(getQuery);
+            getPurchaseProposals.setInt(1,id);
+            ResultSet results = getPurchaseProposals.executeQuery();
             
             while (results.next()) {
 
-            	aankoopVoorstellen.add(new AankoopVoorstellen(
+            	purchaseProposals.add(new AankoopVoorstellen(
                 		results.getInt("id"),
                 		results.getInt("aantal"),
                         results.getInt("gk_voorstel_id"), 
@@ -66,23 +66,23 @@ public class AankoopVoorstellenDaoImpl extends PostgresBaseDao implements Aankoo
             }
 
             results.close();
-            getAankoopVoorstellen.close();
+            getPurchaseProposals.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return aankoopVoorstellen;
+        return purchaseProposals;
 	}
 
 
-	public Boolean save(AankoopVoorstellen aankoopVoorstellen) {
+	public Boolean save(AankoopVoorstellen purchaseProposals) {
         try {
             String saveQuery = "INSERT INTO aankoop_voorstellen(aantal, reden, product_id, gebruikers_id, gk_voorstel_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement save = conn.prepareStatement(saveQuery);
-            save.setInt(1, aankoopVoorstellen.getAantal());
-            save.setString(2, aankoopVoorstellen.getReden());
-            save.setInt(3, aankoopVoorstellen.getProduct_id());
-            save.setInt(4, aankoopVoorstellen.getGebruikers_id());
-            save.setInt(5, aankoopVoorstellen.getGk_voorstel_id());
+            save.setInt(1, purchaseProposals.getAmount());
+            save.setString(2, purchaseProposals.getReason());
+            save.setInt(3, purchaseProposals.getProduct_id());
+            save.setInt(4, purchaseProposals.getUser_id());
+            save.setInt(5, purchaseProposals.getGk_proposal_id());
             save.executeUpdate();
             
             save.close();

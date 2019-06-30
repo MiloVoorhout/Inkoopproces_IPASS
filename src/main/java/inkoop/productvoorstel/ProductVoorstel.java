@@ -2,34 +2,34 @@ package inkoop.productvoorstel;
 
 public class ProductVoorstel {
 	private int id;
-	private String naam;
-	private double prijs;
-	private String categorie;
-	private int gebruikers_id;
-	private int gk_voorstel_id;
+	private String name;
+	private double price;
+	private String category;
+	private int user_id;
+	private int gk_proposal_id;
 	
-	public ProductVoorstel(int id, String naam, double prijs, String categorie, int gebruikers_id, int gk_voorstel_id) {
+	public ProductVoorstel(int id, String name, double price, String category, int user_id, int gk_proposal_id) {
 		this.id = id;
-		this.naam = naam;
-		this.prijs = prijs;
-		this.categorie = categorie;
-		this.gebruikers_id = gebruikers_id;
-		this.gk_voorstel_id = gk_voorstel_id;
+		this.name = name;
+		this.price = price;
+		this.category = category;
+		this.user_id = user_id;
+		this.gk_proposal_id = gk_proposal_id;
 	}
 	
-	public ProductVoorstel(String naam, double prijs, String categorie, int gebruikers_id) {
-		this.naam = naam;
-		this.prijs = prijs;
-		this.categorie = categorie;
-		this.gebruikers_id = gebruikers_id;
+	public ProductVoorstel(String name, double price, String category, int user_id) {
+		this.name = name;
+		this.price = price;
+		this.category = category;
+		this.user_id = user_id;
 	}
 	
-	public ProductVoorstel(String naam, double prijs, String categorie, int gebruikers_id, int gk_voorstel_id) {
-		this.naam = naam;
-		this.prijs = prijs;
-		this.categorie = categorie;
-		this.gebruikers_id = gebruikers_id;
-		this.gk_voorstel_id = gk_voorstel_id;
+	public ProductVoorstel(String name, double price, String category, int user_id, int gk_proposal_id) {
+		this.name = name;
+		this.price = price;
+		this.category = category;
+		this.user_id = user_id;
+		this.gk_proposal_id = gk_proposal_id;
 	}
 	
 	public int getId() {
@@ -40,44 +40,44 @@ public class ProductVoorstel {
 		this.id = id;
 	}
 
-	public String getNaam() {
-		return naam;
+	public String getName() {
+		return name;
 	}
 
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public double getPrijs() {
-		return prijs;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPrijs(double prijs) {
-		this.prijs = prijs;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public String getCategorie() {
-		return categorie;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public int getGebruikers_id() {
-		return gebruikers_id;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setGebruikers_id(int gebruikers_id) {
-		this.gebruikers_id = gebruikers_id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
-	public int getGk_voorstel_id() {
-		return gk_voorstel_id;
+	public int getGk_proposal_id() {
+		return gk_proposal_id;
 	}
 
-	public void setGk_voorstel_id(int gk_voorstel_id) {
-		this.gk_voorstel_id = gk_voorstel_id;
+	public void setGk_proposal_id(int gk_proposal_id) {
+		this.gk_proposal_id = gk_proposal_id;
 	}
 
 }

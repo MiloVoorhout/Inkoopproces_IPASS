@@ -7,7 +7,7 @@ public interface AankoopVoorstellenDao {
     
     public List<AankoopVoorstellen> findByProductId(int id);
     
-    public Boolean save(AankoopVoorstellen aankoopVoorstellen);
+    public Boolean save(AankoopVoorstellen purchaseProposals);
     
     public Boolean delete(int id);
 }

@@ -11,7 +11,7 @@ public interface ProductDao {
     public Boolean save(Product product);
 
     //Update a product
-    public Boolean update(int id, String name, double price, String categorie);
+    public Boolean update(int id, String name, double price, String category);
     
     //Delete a product
     public Boolean delete(int id);

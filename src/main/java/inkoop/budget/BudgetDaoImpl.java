@@ -37,26 +37,21 @@ public class BudgetDaoImpl extends PostgresBaseDao implements BudgetDao{
         return budgets;
 	}
 
-	public Budget findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Boolean update(int nummer, double bedrag, String type) {
+	public Boolean update(int number, double budget, String type) {
         try {
         	if(type.equals("min")) {
                 String updateQuery = "UPDATE budget SET budget = budget - ? WHERE afdeling = ?";
                 PreparedStatement update = conn.prepareStatement(updateQuery);
-                update.setDouble(1, bedrag);
-                update.setInt(2, nummer);
+                update.setDouble(1, budget);
+                update.setInt(2, number);
                 update.executeUpdate();
 
                 return true;
         	} else if (type.equals("plus")) {
         		String updateQuery = "UPDATE budget SET budget = budget + ? WHERE id = ?";
                 PreparedStatement update =  conn.prepareStatement(updateQuery);
-                update.setDouble(1, bedrag);
-                update.setInt(2, nummer);
+                update.setDouble(1, budget);
+                update.setInt(2, number);
                 update.executeUpdate();
 
                 return true;

@@ -7,9 +7,6 @@ public interface BudgetDao {
     //Find all the budgets
     public List<Budget> findAll();
     
-    //Find by budget id
-    public Budget findById(int id);
-    
     //Update a specific budget
-    public Boolean update(int nummer, double bedrag, String type);
+    public Boolean update(int number, double budget, String type);
 }

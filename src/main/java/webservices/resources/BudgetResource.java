@@ -33,7 +33,7 @@ public class BudgetResource {
             
             job.add("id", budget.getId());
             job.add("budget", budget.getBudget());
-            job.add("afdeling", budget.getAfdeling());
+            job.add("afdeling", budget.getDepartment());
 
             jab.add(job);
         }

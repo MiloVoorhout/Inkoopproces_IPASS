@@ -34,9 +34,9 @@ public class ProductResource {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", product.getId());
-            job.add("naam", product.getNaam());
-            job.add("prijs", product.getPrijs());
-            job.add("categorie", product.getCategorie());
+            job.add("naam", product.getName());
+            job.add("prijs", product.getPrice());
+            job.add("categorie", product.getCategory());
 
             jab.add(job);
         }

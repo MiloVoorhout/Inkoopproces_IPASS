@@ -3,17 +3,17 @@ package inkoop.budget;
 public class Budget {
 	private int id;
 	private double budget;
-	private int afdeling;
+	private int department;
 	
-	public Budget(int id, double budget, int afdeling) {
-		this.setId(id);
+	public Budget(int id, double budget, int department) {
+		this.id = id;
 		this.budget = budget;
-		this.afdeling = afdeling;
+		this.department = department;
 	}
 	
-	public Budget(double budget, int afdeling) {
+	public Budget(double budget, int department) {
 		this.budget = budget;
-		this.afdeling = afdeling;
+		this.department = department;
 	}
 
 	public double getBudget() {
@@ -24,12 +24,12 @@ public class Budget {
 		this.budget = budget;
 	}
 
-	public int getAfdeling() {
-		return afdeling;
+	public int getDepartment() {
+		return department;
 	}
 
-	public void setAfdeling(int afdeling) {
-		this.afdeling = afdeling;
+	public void setDepartment(int department) {
+		this.department = department;
 	}
 
 	public int getId() {

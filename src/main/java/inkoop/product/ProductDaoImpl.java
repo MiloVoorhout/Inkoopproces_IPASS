@@ -14,7 +14,7 @@ public class ProductDaoImpl extends PostgresBaseDao implements ProductDao {
     private Connection conn = super.getConnection();	
 
 	public List<Product> findAll() {
-		List<Product> producten = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
 
         try {
             Statement stmt = conn.createStatement();
@@ -22,7 +22,7 @@ public class ProductDaoImpl extends PostgresBaseDao implements ProductDao {
 
             while (results.next()) {
 
-                producten.add(new Product(
+            	products.add(new Product(
                 		results.getInt("id"),
                         results.getString("naam"),
                         results.getDouble("prijs"),
@@ -35,16 +35,16 @@ public class ProductDaoImpl extends PostgresBaseDao implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return producten;
+        return products;
 	}
 	
 	public Boolean save(Product product) {
         try {
             String saveQuery = "INSERT INTO product(naam, prijs, categorie) VALUES (?, ?, ?)";
             PreparedStatement save = conn.prepareStatement(saveQuery);
-            save.setString(1, product.getNaam());
-            save.setDouble(2, product.getPrijs());
-            save.setString(3, product.getCategorie());
+            save.setString(1, product.getName());
+            save.setDouble(2, product.getPrice());
+            save.setString(3, product.getCategory());
             save.executeUpdate();
 
             return true;
@@ -54,13 +54,13 @@ public class ProductDaoImpl extends PostgresBaseDao implements ProductDao {
         return false;
 	}
 
-    public Boolean update(int id, String name, double price, String categorie) {
+    public Boolean update(int id, String name, double price, String category) {
         try {
             String updateQuery = "UPDATE product SET naam = ?, prijs = ?, categorie = ? WHERE id = ?;";
             PreparedStatement update = conn.prepareStatement(updateQuery);
             update.setString(1, name);
             update.setDouble(2, price);
-            update.setString(3, categorie);
+            update.setString(3, category);
             update.setInt(4, id);
             update.executeUpdate();
             

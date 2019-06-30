@@ -2,63 +2,63 @@ package inkoop.aankoopvoorstellen;
 
 public class AankoopVoorstellen {
 	private int id;
-	private int aantal;
-	private String reden;
+	private int amount;
+	private String reason;
 	private int product_id;
-	private int gebruikers_id;
-	private int gk_voorstel_id;
-	private String naam;
-	private double prijs;
-	private int afdeling;
+	private int user_id;
+	private int gk_proposal_id;
+	private String name;
+	private double price;
+	private int department;
 	
-	public AankoopVoorstellen(int id, int aantal, String reden, int product_id, int gebruikers_id, int gk_voorstel_id, String naam, double prijs, int afdeling) {
+	public AankoopVoorstellen(int id, int amount, String reason, int product_id, int user_id, int gk_proposal_id, String name, double price, int department) {
 		this.id = id;
-		this.aantal = aantal;
-		this.reden = reden;
+		this.amount = amount;
+		this.reason = reason;
 		this.product_id = product_id;
-		this.gebruikers_id = gebruikers_id;
-		this.gk_voorstel_id = gk_voorstel_id;
-		this.naam = naam;
-		this.prijs = prijs;
-		this.afdeling = afdeling;
+		this.user_id = user_id;
+		this.gk_proposal_id = gk_proposal_id;
+		this.name = name;
+		this.price = price;
+		this.department = department;
 	}
 	
-	public AankoopVoorstellen(int aantal, String reden, int product_id, int gebruikers_id) {
-		this.aantal = aantal;
-		this.reden = reden;
+	public AankoopVoorstellen(int amount, String reason, int product_id, int user_id) {
+		this.amount = amount;
+		this.reason = reason;
 		this.product_id = product_id;
-		this.gebruikers_id = gebruikers_id;
+		this.user_id = user_id;
 	}
 	
-	public AankoopVoorstellen(int id, int aantal, int gk_voorstel_id, String naam) {
+	public AankoopVoorstellen(int id, int amount, int gk_proposal_id, String name) {
 		this.id = id;
-		this.aantal = aantal;
-		this.gk_voorstel_id = gk_voorstel_id;
-		this.naam = naam;
+		this.amount = amount;
+		this.gk_proposal_id = gk_proposal_id;
+		this.name = name;
 	}
 	
-	public AankoopVoorstellen(int aantal, String reden, int product_id, int gebruikers_id, int gk_voorstel_id) {
-		this.aantal = aantal;
-		this.reden = reden;
+	public AankoopVoorstellen(int amount, String reason, int product_id, int user_id, int gk_proposal_id) {
+		this.amount = amount;
+		this.reason = reason;
 		this.product_id = product_id;
-		this.gebruikers_id = gebruikers_id;
-		this.gk_voorstel_id = gk_voorstel_id;
+		this.user_id = user_id;
+		this.gk_proposal_id = gk_proposal_id;
 	}
 
-	public int getAantal() {
-		return aantal;
+	public int getAmount() {
+		return amount;
 	}
 
-	public void setAantal(int aantal) {
-		this.aantal = aantal;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
-	public String getReden() {
-		return reden;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setReden(String reden) {
-		this.reden = reden;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	public int getProduct_id() {
@@ -69,12 +69,12 @@ public class AankoopVoorstellen {
 		this.product_id = product_id;
 	}
 
-	public int getGebruikers_id() {
-		return gebruikers_id;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setGebruikers_id(int gebruikers_id) {
-		this.gebruikers_id = gebruikers_id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public int getId() {
@@ -85,36 +85,36 @@ public class AankoopVoorstellen {
 		this.id = id;
 	}
 	
-	public int getGk_voorstel_id() {
-		return gk_voorstel_id;
+	public int getGk_proposal_id() {
+		return gk_proposal_id;
 	}
 
-	public void setGk_voorstel_id(int gk_voorstel_id) {
-		this.gk_voorstel_id = gk_voorstel_id;
+	public void setGk_proposal_id(int gk_proposal_id) {
+		this.gk_proposal_id = gk_proposal_id;
 	}
 
-	public String getNaam() {
-		return naam;
+	public String getName() {
+		return name;
 	}
 
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public double getPrijs() {
-		return prijs;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPrijs(double prijs) {
-		this.prijs = prijs;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public int getAfdeling() {
-		return afdeling;
+	public int getDepartment() {
+		return department;
 	}
 
-	public void setAfdeling(int afdeling) {
-		this.afdeling = afdeling;
+	public void setDepartment(int department) {
+		this.department = department;
 	}
 
 	

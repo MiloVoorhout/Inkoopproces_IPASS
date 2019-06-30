@@ -17,20 +17,20 @@ import inkoop.gebruiker.GebruikerPostgresDaoImpl;
 
 @Path("/gebruiker")
 public class GebruikerResource {
-	private GebruikerPostgresDaoImpl gebruikerDao = new GebruikerPostgresDaoImpl();
+	private GebruikerPostgresDaoImpl userDao = new GebruikerPostgresDaoImpl();
 	
 	@GET
     @Path("{statusId}")
     @Produces("application/json")
-    public String getGebruiker(@PathParam("statusId") int id) {
+    public String getUser(@PathParam("statusId") int id) {
     	JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (Gebruiker gebruiker : gebruikerDao.findById(id)) {
+        for (Gebruiker user : userDao.findById(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
-            job.add("id", gebruiker.getId());
-            job.add("naam", (gebruiker.getVoornaam() + " " + gebruiker.getAchternaam()));
-            job.add("afdeling", gebruiker.getAfdeling());
+            job.add("id", user.getId());
+            job.add("naam", (user.getFirstName() + " " + user.getLastname()));
+            job.add("afdeling", user.getDepartment());
 
             jab.add(job);
         }

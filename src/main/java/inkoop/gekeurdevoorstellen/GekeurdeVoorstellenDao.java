@@ -6,7 +6,7 @@ import java.util.List;
 public interface GekeurdeVoorstellenDao {
 	public List<GekeurdeVoorstellen> findAll(int id);
 	
-    public int save(GekeurdeVoorstellen gekeurdeVoorstellen);
+    public int save(GekeurdeVoorstellen approvedProposals);
     
     public Boolean update(int id, String status);
     

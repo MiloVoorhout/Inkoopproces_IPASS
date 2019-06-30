@@ -35,7 +35,7 @@ public class Authenticatie {
                                      @FormParam("password") String password) {
         try {
             Gebruiker gebruiker = gebruikerDao.findRoleForUser(username, password);
-            String role = gebruiker.getRol();
+            String role = gebruiker.getRole();
 
             if (role == null) { throw new IllegalArgumentException("No user found!");  }
 

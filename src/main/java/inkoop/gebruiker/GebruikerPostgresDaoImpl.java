@@ -15,7 +15,7 @@ public class GebruikerPostgresDaoImpl extends PostgresBaseDao {
 	private Connection conn = super.getConnection();
 	
 	public Gebruiker findRoleForUser(String name, String pass) {
-		Gebruiker gebruiker = null;
+		Gebruiker user = null;
 
 		
 		try {
@@ -27,7 +27,7 @@ public class GebruikerPostgresDaoImpl extends PostgresBaseDao {
 			ResultSet results = select.executeQuery();
 			
 			while (results.next()) {
-				gebruiker = new Gebruiker(
+				user = new Gebruiker(
 						results.getInt("id"),
 						results.getString("rol")
 				);
@@ -38,11 +38,11 @@ public class GebruikerPostgresDaoImpl extends PostgresBaseDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return gebruiker;
+		return user;
 	}
 	
 	public List<Gebruiker> findById(int id) {
-		List<Gebruiker> gebruiker = new ArrayList<>();
+		List<Gebruiker> user = new ArrayList<>();
 
         try {
         	Statement stmt = conn.createStatement();
@@ -53,7 +53,7 @@ public class GebruikerPostgresDaoImpl extends PostgresBaseDao {
 
             while (results.next()) {
 
-            	gebruiker.add(new Gebruiker(
+            	user.add(new Gebruiker(
             			results.getInt("id"),
                         results.getString("voornaam"),
                         results.getString("achternaam"),
@@ -66,7 +66,7 @@ public class GebruikerPostgresDaoImpl extends PostgresBaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return gebruiker;
+        return user;
 	}
 	
 }

@@ -2,45 +2,45 @@ package inkoop.product;
 
 public class Product {
 	private int id;
-	private String naam;
-	private double prijs;
-	private String categorie;
+	private String name;
+	private double price;
+	private String category;
 	
-	public Product(int id, String naam, double prijs, String categorie) {
-		this.setId(id);
-		this.naam = naam;
-		this.prijs = prijs;
-		this.categorie = categorie;
+	public Product(int id, String name, double price, String category) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.category = category;
 	}
 	
-	public Product(String naam, double prijs, String categorie) {
-		this.naam = naam;
-		this.prijs = prijs;
-		this.categorie = categorie;
+	public Product(String name, double price, String category) {
+		this.name = name;
+		this.price = price;
+		this.category = category;
 	}
 
-	public String getNaam() {
-		return naam;
+	public String getName() {
+		return name;
 	}
 
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public double getPrijs() {
-		return prijs;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPrijs(double prijs) {
-		this.prijs = prijs;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public String getCategorie() {
-		return categorie;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getId() {
