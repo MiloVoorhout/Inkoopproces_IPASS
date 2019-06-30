@@ -22,15 +22,15 @@ import inkoop.productvoorstel.ProductVoorstelDaoImpl;
 
 @Path("/product_voorstel")
 public class ProductVoorstellenResource {
-	private ProductVoorstelDaoImpl productProposalDao = new ProductVoorstelDaoImpl();
 	
     @GET
     @Path("/{userId}")
     @Produces("application/json")
     public String getProducts(@PathParam("userId") int id) {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (ProductVoorstel productProposal : productProposalDao.findAll(id)) {
+        for (ProductVoorstel productProposal : inkoopService.getProductsWithId(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", productProposal.getId());
@@ -51,12 +51,13 @@ public class ProductVoorstellenResource {
     @Path("/save")
     @Produces("application/json")
     public Response addProductProposal(String response) throws ParseException{    	
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	ProductVoorstel productProposal = new ProductVoorstel(json.get("productNaam").toString(), Double.parseDouble(json.get("productPrijs").toString()), json.get("productCategorie").toString(), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
-        boolean saveProductProposal = productProposalDao.save(productProposal);
+        boolean saveProductProposal = inkoopService.addProductProposal(productProposal);
         return Response.ok(saveProductProposal).build();
     }
     
@@ -64,7 +65,8 @@ public class ProductVoorstellenResource {
     @Path("delete/{productProposalId}")
     @Produces("application/json")
     public Response deleteProductProposal(@PathParam("productProposalId") int id) {
-        boolean deleteStatus = productProposalDao.delete(id);
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
+        boolean deleteStatus = inkoopService.deleteProductProposal(id);
 
         return Response.ok(deleteStatus).build();
     }

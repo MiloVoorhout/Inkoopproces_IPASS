@@ -23,14 +23,14 @@ import inkoop.productvoorstel.ProductVoorstel;
 
 @Path("/product")
 public class ProductResource {
-	private ProductDaoImpl productDao = new ProductDaoImpl();
 	
     @GET
     @Produces("application/json")
     public String getProducts() {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (Product product : productDao.findAll()) {
+        for (Product product : inkoopService.getProducts()) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", product.getId());
@@ -48,20 +48,22 @@ public class ProductResource {
     @POST
     @Path("/save")
     @Produces("application/json")
-    public Response addProduct(String response) throws ParseException{    	
+    public Response addProduct(String response) throws ParseException{    
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	Product saveProduct = new Product(json.get("productNaam").toString(), Double.parseDouble(json.get("productPrijs").toString()), json.get("productCategorie").toString());
 
-        boolean saveProductStatus = productDao.save(saveProduct);
+        boolean saveProductStatus = inkoopService.addProduct(saveProduct);
         return Response.ok(saveProductStatus).build();
     }
     
     @PUT
     @Path("/update")
     @Produces("application/json")
-    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    	
+    public boolean updateProduct(String response) throws ParseException{    
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
@@ -71,15 +73,16 @@ public class ProductResource {
     	String productCategorie = json.get("categorie").toString();
 
 
-        boolean updateProduct = productDao.update(productId, productName, productPrice, productCategorie);
+        boolean updateProduct = inkoopService.updateProduct(productId, productName, productPrice, productCategorie);
         return updateProduct;
     }
     
     @DELETE
     @Path("delete/{productId}")
     @Produces("application/json")
-    public Response deleteAankoopVoorstel(@PathParam("productId") int id) {
-        boolean deleteStatus = productDao.delete(id);
+    public Response deleteProduct(@PathParam("productId") int id) {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
+        boolean deleteStatus = inkoopService.delteProduct(id);
 
         return Response.ok(deleteStatus).build();
     }

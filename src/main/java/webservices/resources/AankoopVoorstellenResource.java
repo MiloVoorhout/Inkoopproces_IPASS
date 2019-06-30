@@ -17,21 +17,19 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import inkoop.aankoopvoorstellen.AankoopVoorstellen;
-import inkoop.aankoopvoorstellen.AankoopVoorstellenDaoImpl;
-import inkoop.productvoorstel.ProductVoorstel;
 
 
 @Path("/aankoop_voorstellen")
-public class AankoopVoorstellenResource {
-	private AankoopVoorstellenDaoImpl purchaseProposalDao = new AankoopVoorstellenDaoImpl();
+public class AankoopVoorstellenResource {	
 	
     @GET
     @Path("/{userId}")
     @Produces("application/json")
     public String getPurchaseProposal(@PathParam("userId") int id) {
+    	InkoopService inkoopService= ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (AankoopVoorstellen purchaseProposals : purchaseProposalDao.findAll(id)) {
+        for (AankoopVoorstellen purchaseProposals : inkoopService.getPurchaseProposal(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", purchaseProposals.getId());
@@ -55,9 +53,10 @@ public class AankoopVoorstellenResource {
     @Path("/products/{productId}")
     @Produces("application/json")
     public String getPurchaseProposalId(@PathParam("productId") int id) {
+    	InkoopService inkoopService= ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (AankoopVoorstellen purchaseProposal : purchaseProposalDao.findByProductId(id)) {
+        for (AankoopVoorstellen purchaseProposal : inkoopService.getPurchaseProposalId(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", purchaseProposal.getId());
@@ -76,12 +75,13 @@ public class AankoopVoorstellenResource {
     @Path("/save")
     @Produces("application/json")
     public Response addPurchaseProposal(String response) throws ParseException{    	
+    	InkoopService inkoopService= ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	AankoopVoorstellen purchaseProposal = new AankoopVoorstellen(Integer.parseInt(json.get("productAantal").toString()), json.get("aankoopReden").toString(), Integer.parseInt(json.get("productId").toString()), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
-        boolean savePurchaseProposal = purchaseProposalDao.save(purchaseProposal);
+        boolean savePurchaseProposal = inkoopService.addPurchaseProposal(purchaseProposal);
         return Response.ok(savePurchaseProposal).build();
     }
     
@@ -89,7 +89,8 @@ public class AankoopVoorstellenResource {
     @Path("delete/{PurchaseProposalId}")
     @Produces("application/json")
     public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
-        boolean deleteStatus = purchaseProposalDao.delete(id);
+    	InkoopService inkoopService= ServiceProvider.getInkoopService();
+        boolean deleteStatus = inkoopService.delteProduct(id);
 
         return Response.ok(deleteStatus).build();
     }

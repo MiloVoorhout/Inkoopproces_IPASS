@@ -16,20 +16,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import inkoop.aankoopvoorstellen.AankoopVoorstellen;
 import inkoop.budgetvoorstellen.BudgetVoorstellen;
-import inkoop.budgetvoorstellen.BudgetVoorstellenDaoImpl;
 
 @Path("/budget_voorstellen")
 public class BudgetVoorstellenResource {
-	private BudgetVoorstellenDaoImpl budgetProposalDao = new BudgetVoorstellenDaoImpl();
 	
     @GET
     @Produces("application/json")
-    public String getProducts() {
+    public String getBudgetsProposals() {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (BudgetVoorstellen budgetProposal : budgetProposalDao.findAll()) {
+        for (BudgetVoorstellen budgetProposal : inkoopService.getBudgetsProposals()) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", budgetProposal.getId());
@@ -50,21 +48,23 @@ public class BudgetVoorstellenResource {
     @POST
     @Path("/save")
     @Produces("application/json")
-    public Response addBudgetVoorstel(String response) throws ParseException{    	
+    public Response addBudgetProposals(String response) throws ParseException{  
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	BudgetVoorstellen budgetProposal = new BudgetVoorstellen(Double.parseDouble(json.get("budgetVergroting").toString()), Integer.parseInt(json.get("budgetAfdeling").toString()), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("budgetId").toString()), Integer.parseInt(json.get("response").toString()));
 
-        boolean saveBudgetProposal = budgetProposalDao.save(budgetProposal);
+        boolean saveBudgetProposal = inkoopService.addBudgetProposals(budgetProposal);
         return Response.ok(saveBudgetProposal).build();
     }
     
     @DELETE
     @Path("delete/{budgetProposalId}")
     @Produces("application/json")
-    public Response deleteBudgetVoorstel(@PathParam("budgetProposalId") int id) {
-        boolean deleteStatus = budgetProposalDao.delete(id);
+    public Response deleteBudgetProposals(@PathParam("budgetProposalId") int id) {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
+        boolean deleteStatus = inkoopService.deleteBudgetProposals(id);
 
         return Response.ok(deleteStatus).build();
     }

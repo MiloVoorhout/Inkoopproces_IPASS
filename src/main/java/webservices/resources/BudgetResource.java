@@ -15,20 +15,17 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import inkoop.budget.Budget;
-import inkoop.budget.BudgetDaoImpl;
-
 
 @Path("/budget")
 public class BudgetResource {
-	private BudgetDaoImpl budgetDao = new BudgetDaoImpl();
-
 	
     @GET
     @Produces("application/json")
-    public String getProducts() {
+    public String getBudgets() {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (Budget budget : budgetDao.findAll()) {
+        for (Budget budget : inkoopService.getBudgets()) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", budget.getId());
@@ -45,23 +42,25 @@ public class BudgetResource {
     @PUT
     @Path("/update/aankoop_voorstel")
     @Produces("application/json")
-    public boolean updateBudgetAankoop(String response) throws ParseException{    	
+    public boolean updateBudgetPurchase(String response) throws ParseException{    
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
-    	int budgetAfdeling = Integer.parseInt(json.get("budgetAfdeling").toString());
-    	double budgetPrijs = Double.parseDouble(json.get("budgetPrijs").toString());
+    	int budgetDepartment = Integer.parseInt(json.get("budgetAfdeling").toString());
+    	double budgetPrice = Double.parseDouble(json.get("budgetPrijs").toString());
     	String budgetType = json.get("type").toString();
 
 
-        boolean updateBudget = budgetDao.update(budgetAfdeling, budgetPrijs, budgetType);
+        boolean updateBudget = inkoopService.updateBudgetPurchase(budgetDepartment, budgetPrice, budgetType);
         return updateBudget;
     }
     
     @PUT
     @Path("/update/budget_voorstel")
     @Produces("application/json")
-    public boolean updateBudgetVoorstel(String response) throws ParseException{    	
+    public boolean updateBudgetProposal(String response) throws ParseException{    	
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
@@ -70,7 +69,7 @@ public class BudgetResource {
     	String budgetType = json.get("type").toString();
 
 
-        boolean updateBudget = budgetDao.update(budgetId, budgetPrijs, budgetType);
+        boolean updateBudget = inkoopService.updateBudgetProposal(budgetId, budgetPrijs, budgetType);
         return updateBudget;
     }
     

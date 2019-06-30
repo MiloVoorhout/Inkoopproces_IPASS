@@ -19,21 +19,20 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import inkoop.gekeurdevoorstellen.GekeurdeVoorstellen;
-import inkoop.gekeurdevoorstellen.GekeurdeVoorstellenDaoImpl;
 
 
 @Path("/gekeurde_voorstellen")
 public class GekeurdeVoorstellenResource {
-	private GekeurdeVoorstellenDaoImpl approvedProposalDao = new GekeurdeVoorstellenDaoImpl();
 	
     @GET
     @Path("/{userId}")
     @Produces("application/json")
 //    @RolesAllowed("admin")
     public String getGekeurdeVoorstellen(@PathParam("userId") int id) {
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
-        for (GekeurdeVoorstellen approvedProposal : approvedProposalDao.findAll(id)) {
+        for (GekeurdeVoorstellen approvedProposal : inkoopService.getGekeurdeVoorstellen(id)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", approvedProposal.getId());
@@ -51,41 +50,44 @@ public class GekeurdeVoorstellenResource {
     @POST
     @Path("/save")
     @Produces("application/json")
-    public int addGekeurdeVoorstel(String response) throws ParseException{    	
+    public int addGekeurdeVoorstel(String response) throws ParseException{   
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	GekeurdeVoorstellen approvedProposal = new GekeurdeVoorstellen(json.get("productNaam").toString(), "In afwachting", Integer.parseInt(json.get("gebruikerId").toString()));
 
-        int saveApprovedProposal = approvedProposalDao.save(approvedProposal);
+        int saveApprovedProposal = inkoopService.addGekeurdeVoorstel(approvedProposal);
         return saveApprovedProposal;
     }
     
     @PUT
     @Path("/update")
     @Produces("application/json")
-    public boolean updateGekeurdeVoorstel(String response) throws ParseException{    	
+    public boolean updateGekeurdeVoorstel(String response) throws ParseException{  
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
     	String approvedProposalStatus = json.get("updateStatus").toString();
 
-        boolean updateApprovedProposal = approvedProposalDao.update(approvedProposalId, approvedProposalStatus);
+        boolean updateApprovedProposal = inkoopService.updateGekeurdeVoorstel(approvedProposalId, approvedProposalStatus);
         return updateApprovedProposal;
     }
     
     @PUT
     @Path("/update_product")
     @Produces("application/json")
-    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    	
+    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
     	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
     	String approvedProposalName = json.get("updateName").toString();
 
-        boolean updateName = approvedProposalDao.updateProduct(approvedProposalId, approvedProposalName);
+        boolean updateName = inkoopService.updateNameGekeurdeVoorstel(approvedProposalId, approvedProposalName);
         return updateName;
     }
     
@@ -93,7 +95,8 @@ public class GekeurdeVoorstellenResource {
     @Path("delete/{statusId}")
     @Produces("application/json")
     public Response deleteStatus(@PathParam("statusId") int id) {
-        boolean deleteStatus = approvedProposalDao.delete(id);
+    	InkoopService inkoopService = ServiceProvider.getInkoopService();
+        boolean deleteStatus = inkoopService.deleteStatus(id);
         return Response.ok(deleteStatus).build();
     }
 }
