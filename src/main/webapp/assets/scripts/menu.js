@@ -36,7 +36,7 @@ function keurenButton() {
 
     	
 	} else if (role === "Budget manager") {
-		menuButtonBody.innerHTML += '<a href="budget_keuren.html"><button class="menu-button" name="product" value="Producten" id="producten"">Producten</button></a>';
+		menuButtonBody.innerHTML += '<a href="budget_keuren.html"><button class="menu-button" name="keuren" value="Keuren" id="keuren"">Keuren</button></a>';
 		
 		$(".menu-content").css("margin", "12vh auto");
 	}

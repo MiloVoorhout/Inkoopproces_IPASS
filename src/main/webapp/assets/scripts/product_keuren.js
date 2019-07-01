@@ -34,32 +34,38 @@ function loadProductVoorstellen() {
 	fetch('restservices/product_voorstel/' + userId, {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(pvoorstellen){
-		for(const voorstel of pvoorstellen) {
-			var voorstelDiv = document.querySelector(".voorstel-div");
-			voorstelDiv.style.width = "100%";
+		if (pvoorstellen.length === 0) {
+			productVoorstelBody.innerHTML +=	'<div>' +
+										'<label>Er zijn geen budget voorstellen</label>' +
+									'</div>';
+		} else {
+			for(const voorstel of pvoorstellen) {
+				var voorstelDiv = document.querySelector(".voorstel-div");
+				voorstelDiv.style.width = "100%";
+				
+				productVoorstelBody.innerHTML += 
+					'<div class="voorstel-hole" productVoorstelId="' + voorstel.id +'" gkVoorstelId="' + voorstel.gk_id +'" productNaam="' + voorstel.naam +'" productPrijs="' + (voorstel.prijs).toFixed(2) +'" productCategorie="' + voorstel.categorie +'">' +
+						'<div class="voorstel-block">' +
+		    				'<div>' +
+		    					'<label>Product: ' + voorstel.naam + '</label>' +
+		    				'</div>' +
+				    		'<div>' +
+				    			'<label>Prijs: € ' + (voorstel.prijs).toFixed(2) + '</label>' +
+				    		'</div>' +
+					    	'<div>' +
+								'<label>Categorie: ' + voorstel.categorie + '</label>' + 
+				    		'</div>' +
+						'</div>' +
+						'<div class="voorstel-buttons">' +
+							'<i class="fas fa-check"></i>' +
+							'<i class="fas fa-times"></i>' +
+						'</div>' +
+					'</div>';
+			}
 			
-			productVoorstelBody.innerHTML += 
-				'<div class="voorstel-hole" productVoorstelId="' + voorstel.id +'" gkVoorstelId="' + voorstel.gk_id +'" productNaam="' + voorstel.naam +'" productPrijs="' + (voorstel.prijs).toFixed(2) +'" productCategorie="' + voorstel.categorie +'">' +
-					'<div class="voorstel-block">' +
-	    				'<div>' +
-	    					'<label>Product: ' + voorstel.naam + '</label>' +
-	    				'</div>' +
-			    		'<div>' +
-			    			'<label>Prijs: € ' + (voorstel.prijs).toFixed(2) + '</label>' +
-			    		'</div>' +
-				    	'<div>' +
-							'<label>Categorie: ' + voorstel.categorie + '</label>' + 
-			    		'</div>' +
-					'</div>' +
-					'<div class="voorstel-buttons">' +
-						'<i class="fas fa-check"></i>' +
-						'<i class="fas fa-times"></i>' +
-					'</div>' +
-				'</div>';
+			productVoorstelGoedKeuren();
+			productVoorstelAfKeuren()
 		}
-		
-		productVoorstelGoedKeuren();
-		productVoorstelAfKeuren()
 	})
 }
 
@@ -144,40 +150,46 @@ function loadAankoopVoorstellen() {
 	fetch('restservices/aankoop_voorstellen/'+userId, {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(aankoopVoorstellen){
-		for(const aVoorstel of aankoopVoorstellen) {
-			var voorstelDiv = document.querySelector(".voorstel-div");
-			voorstelDiv.style.width = "80%";
+		if (aankoopVoorstellen.length === 0) {
+			aankoopVoorstelBody.innerHTML +=	'<div>' +
+										'<label>Er zijn geen budget voorstellen</label>' +
+									'</div>';
+		} else {
+			for(const aVoorstel of aankoopVoorstellen) {
+				var voorstelDiv = document.querySelector(".voorstel-div");
+				voorstelDiv.style.width = "80%";
+				
+				aankoopVoorstelBody.innerHTML += 
+					'<div class="voorstel-hole" aankoopVoorstelId="' + aVoorstel.id +'" gkVoorstelId="' + aVoorstel.gk_id +'" afdelingGebruiker="' + aVoorstel.afdeling +'" totaalPrijs="' + (aVoorstel.totaalPrijs).toFixed(2) +'">' +
+				 		'<div class="voorstel-block">' +
+				 			'<div>' +
+				 				'<label>Product: ' + aVoorstel.naam + '</label>' +
+				 			'</div>' +
+				 			'<div>' + 
+				 				'<label>Aantal: ' + aVoorstel.aantal + '</label>' +
+				 			'</div>' +
+				 			'<div>' +
+				 				'<label>Totaal prijs: € ' + (aVoorstel.totaalPrijs).toFixed(2) + '</label>' +
+				 			'</div>' +
+				 			'<div>' +
+			 				'<label>Afdeling: ' + aVoorstel.afdeling + '</label>' +
+			 			'</div>' +
+				 			'<div>' +
+				 				'<label>Reden: ' + aVoorstel.reden + '</label>' +
+				 			'</div>' +
+				 		'</div>' +
+				
+				 		'<div class="voorstel-buttons">' +
+				 			'<i class="fas fa-check"></i>' +
+				 			'<i class="fas fa-times"></i>' +
+				 		'</div>' + 
+				 	'</div>';
+			}
 			
-			aankoopVoorstelBody.innerHTML += 
-				'<div class="voorstel-hole" aankoopVoorstelId="' + aVoorstel.id +'" gkVoorstelId="' + aVoorstel.gk_id +'" afdelingGebruiker="' + aVoorstel.afdeling +'" totaalPrijs="' + (aVoorstel.totaalPrijs).toFixed(2) +'">' +
-			 		'<div class="voorstel-block">' +
-			 			'<div>' +
-			 				'<label>Product: ' + aVoorstel.naam + '</label>' +
-			 			'</div>' +
-			 			'<div>' + 
-			 				'<label>Aantal: ' + aVoorstel.aantal + '</label>' +
-			 			'</div>' +
-			 			'<div>' +
-			 				'<label>Totaal prijs: € ' + (aVoorstel.totaalPrijs).toFixed(2) + '</label>' +
-			 			'</div>' +
-			 			'<div>' +
-		 				'<label>Afdeling: ' + aVoorstel.afdeling + '</label>' +
-		 			'</div>' +
-			 			'<div>' +
-			 				'<label>Reden: ' + aVoorstel.reden + '</label>' +
-			 			'</div>' +
-			 		'</div>' +
-			
-			 		'<div class="voorstel-buttons">' +
-			 			'<i class="fas fa-check"></i>' +
-			 			'<i class="fas fa-times"></i>' +
-			 		'</div>' + 
-			 	'</div>';
+			aankoopVoorstelGoedKeuren();
+			aankoopVoorstelAfKeuren();
+			loadBudget();
 		}
-		
-		aankoopVoorstelGoedKeuren();
-		aankoopVoorstelAfKeuren();
-		loadBudget();
 	})
 }
 

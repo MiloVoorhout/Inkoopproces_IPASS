@@ -19,31 +19,36 @@ function loadBudgetVoorstellen() {
 	fetch('restservices/budget_voorstellen', {method: 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 	.then(response => response.json())
 	.then(function(budgetVoorstellen){
-
-        for (const budgetVoorstel of budgetVoorstellen) {
-        	const vergrotingEuro = budgetVoorstel.vergroting;
-        	budgetBody.innerHTML += '<div class="budget-hole" budgetId="' + budgetVoorstel.id +'" budgetVergroting="' + vergrotingEuro.toFixed(2) +'" gkVoorstelId="' + budgetVoorstel.gk_id +'">' +
-	        	'<div class="budget-block">' +
-	        		'<div>' +
-	        			'<label>Werknemer:' + ' ' + budgetVoorstel.gebruikers_naam + '</label>' +
-	        		'</div>' +
-	        		'<div>' +
-	        			'<label>Afdeling:' + ' ' + budgetVoorstel.afdeling + '</label>' +
-	        		'</div>' +
-	        		'<div>' +
-						'<label>Vergroting:' + ' € ' + vergrotingEuro.toFixed(2) + '</label>' +
-	        		'</div>' +
-	        	'</div>' +
-    	
-	    		'<div class="budget-buttons" nummer="123">' +
-					'<i class="fas fa-check"></i>' +
-					'<i class="fas fa-times"></i>' +
-	    		'</div>' +
-        	'</div>';
-        }
-        
-        budgetVoorstelGoedkeuren();
-        budgetVoorstelAfkeuren();
+		if (budgetVoorstellen.length === 0) {
+        	budgetBody.innerHTML +=	'<div>' +
+										'<label>Er zijn geen budget voorstellen</label>' +
+									'</div>';
+		} else {
+	        for (const budgetVoorstel of budgetVoorstellen) {
+	        	const vergrotingEuro = budgetVoorstel.vergroting;
+	        	budgetBody.innerHTML += '<div class="budget-hole" budgetId="' + budgetVoorstel.id +'" budgetVergroting="' + vergrotingEuro.toFixed(2) +'" gkVoorstelId="' + budgetVoorstel.gk_id +'">' +
+		        	'<div class="budget-block">' +
+		        		'<div>' +
+		        			'<label>Werknemer:' + ' ' + budgetVoorstel.gebruikers_naam + '</label>' +
+		        		'</div>' +
+		        		'<div>' +
+		        			'<label>Afdeling:' + ' ' + budgetVoorstel.afdeling + '</label>' +
+		        		'</div>' +
+		        		'<div>' +
+							'<label>Vergroting:' + ' € ' + vergrotingEuro.toFixed(2) + '</label>' +
+		        		'</div>' +
+		        	'</div>' +
+	    	
+		    		'<div class="budget-buttons" nummer="123">' +
+						'<i class="fas fa-check"></i>' +
+						'<i class="fas fa-times"></i>' +
+		    		'</div>' +
+	        	'</div>';
+	        }
+	        
+	        budgetVoorstelGoedkeuren();
+	        budgetVoorstelAfkeuren();
+		}
 	})
 }
 
