@@ -71,7 +71,6 @@ public class BudgetResource {
     	double budgetPrijs = Double.parseDouble(json.get("budgetPrijs").toString());
     	String budgetType = json.get("type").toString();
 
-
         boolean updateBudget = inkoopService.updateBudgetProposal(budgetId, budgetPrijs, budgetType);
         return updateBudget;
     }

@@ -26,7 +26,7 @@ function loadBudgetVoorstellen() {
 		} else {
 	        for (const budgetVoorstel of budgetVoorstellen) {
 	        	const vergrotingEuro = budgetVoorstel.vergroting;
-	        	budgetBody.innerHTML += '<div class="budget-hole" budgetId="' + budgetVoorstel.id +'" budgetVergroting="' + vergrotingEuro.toFixed(2) +'" gkVoorstelId="' + budgetVoorstel.gk_id +'">' +
+	        	budgetBody.innerHTML += '<div class="budget-hole" budgetId="' + budgetVoorstel.budget_id +'" budgetVergroting="' + vergrotingEuro.toFixed(2) +'" gkVoorstelId="' + budgetVoorstel.gk_id +'">' +
 		        	'<div class="budget-block">' +
 		        		'<div>' +
 		        			'<label>Werknemer:' + ' ' + budgetVoorstel.gebruikers_naam + '</label>' +
@@ -63,6 +63,8 @@ function budgetVoorstelGoedkeuren() {
 			type = "plus";
 			budgetId = this.parentNode.parentNode.getAttribute("budgetId");
 			budgetPrijs = this.parentNode.parentNode.getAttribute("budgetVergroting");
+			
+			console.log(budgetId);
 			
 			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
