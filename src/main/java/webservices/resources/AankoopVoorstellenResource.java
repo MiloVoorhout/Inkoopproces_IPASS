@@ -89,12 +89,12 @@ public class AankoopVoorstellenResource {
     }
     
     @DELETE
-    @Path("/delete/{PurchaseProposalId}")
+    @Path("delete/{PurchaseProposalId}")
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
-        boolean deleteStatus = inkoopService.deleteProductProposal(id);
+        boolean deleteStatus = inkoopService.deletePurchaseProposal(id);
 
         return Response.ok(deleteStatus).build();
     }

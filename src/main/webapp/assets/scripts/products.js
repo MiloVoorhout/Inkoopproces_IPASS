@@ -65,6 +65,8 @@ function deleteButton() {
 					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    .then(function(response){
 				    	if(response) {
+				    		loadProducts();
+
 					    	var toastUp = document.getElementById("toastDelete");
 							toastUp.className = "show";
 							setTimeout(function(){ 
@@ -90,29 +92,28 @@ function deleteButton() {
 					    	if(response) {
 							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							    .then(function(response){
-							    	console.log(response.ok)
+									fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+								    .then(function(response){
+								    	if(response) {
+								    		loadProducts();
+
+									    	var toastUp = document.getElementById("toastDelete");
+											toastUp.className = "show";
+											setTimeout(function(){ 
+												toastUp.className = toastUp.className.replace("show", ""); 
+											}, 3000);
+								    	} else {
+								    		var toastUp = document.getElementById("toastFout");
+											toastUp.className = "show";
+											setTimeout(function(){ 
+												toastUp.className = toastUp.className.replace("show", ""); 
+											}, 3000);
+								    	}
+								    })
 							    })
 					    	}
 					    })
-					}	
-					
-					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
-				    .then(function(response){
-				    	if(response) {
-					    	var toastUp = document.getElementById("toastDelete");
-							toastUp.className = "show";
-							setTimeout(function(){ 
-								toastUp.className = toastUp.className.replace("show", ""); 
-							}, 3000);
-				    	} else {
-				    		var toastUp = document.getElementById("toastFout");
-							toastUp.className = "show";
-							setTimeout(function(){ 
-								toastUp.className = toastUp.className.replace("show", ""); 
-							}, 3000);
-				    	}
-				    })
-					
+					}
 					
 				} else {
 					var toastUp = document.getElementById("toastFout");
@@ -124,7 +125,6 @@ function deleteButton() {
 			})
 		});
 	}
-	loadProducts
 }
 
 function editButton() {
@@ -166,6 +166,8 @@ function editButton() {
 						.then(response => response.json())
 					    .then(function(response){
 					    	if(response) {
+					    		loadProducts();
+					    		
 					    		var toastUp = document.getElementById("toastUpdate");
 								toastUp.className = "show";
 								setTimeout(function(){ 
@@ -194,7 +196,8 @@ function editButton() {
 									.then(response => response.json())
 								    .then(function(response){
 								    	if(response) {
-											console.log(response);
+								    		loadProducts();
+
 								    		var toastUp = document.getElementById("toastUpdate");
 											toastUp.className = "show";
 											setTimeout(function(){ 
@@ -223,7 +226,6 @@ function editButton() {
 			});
 		});
 	}
-	loadProducts();
 }
 
 function tableFilter() {
