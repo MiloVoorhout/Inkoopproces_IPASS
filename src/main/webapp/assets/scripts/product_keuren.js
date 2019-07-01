@@ -35,9 +35,9 @@ function loadProductVoorstellen() {
 	.then(response => response.json())
 	.then(function(pvoorstellen){
 		if (pvoorstellen.length === 0) {
-			productVoorstelBody.innerHTML += '<div>' +
-											 	'<label>Er zijn geen product voorstellen</label>' +
-											 '</div>';
+			productVoorstelBody.innerHTML +=	'<div>' +
+										'<label>Er zijn geen product voorstellen</label>' +
+									'</div>';
 		} else {
 			for(const voorstel of pvoorstellen) {
 				var voorstelDiv = document.querySelector(".voorstel-div");
@@ -151,9 +151,9 @@ function loadAankoopVoorstellen() {
 	.then(response => response.json())
 	.then(function(aankoopVoorstellen){
 		if (aankoopVoorstellen.length === 0) {
-			aankoopVoorstelBody.innerHTML += '<div>' +
-											 	'<label>Er zijn geen aankoop voorstellen</label>' +
-											 '</div>';
+			aankoopVoorstelBody.innerHTML +=	'<div>' +
+											'<label>Er zijn geen aankoop voorstellen</label>' +
+										'</div>';
 		} else {
 			for(const aVoorstel of aankoopVoorstellen) {
 				var voorstelDiv = document.querySelector(".voorstel-div");
