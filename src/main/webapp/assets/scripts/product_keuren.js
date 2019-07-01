@@ -143,7 +143,7 @@ function loadAankoopVoorstellen() {
 	if (!($(window).width() < 960)) {
 		$(".keuren-content").css("max-width", "65%");
 	} else {
-		$(".voorstel-div").css({'width': '80%', 'height' : '39vh', 'overflow-y' : 'auto', 'display' : 'inline-block', 'padding' : '4px 0px 4px 0px'});
+		$(".voorstel-div").css({'width': '80%', 'height' : '32vh', 'overflow-y' : 'auto', 'display' : 'inline-block', 'padding' : '4px 0px 4px 0px'});
 	}
 	
 	
