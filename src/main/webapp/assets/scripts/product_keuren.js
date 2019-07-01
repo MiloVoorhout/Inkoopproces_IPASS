@@ -204,7 +204,7 @@ function aankoopVoorstelGoedKeuren() {
 				    	if(response) {
 				    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    		.then(function(response){
-				    			console.log(response);
+				    			console.log(response.ok);
 				    			
 				    			loadAankoopVoorstellen();
 						    })
@@ -231,7 +231,7 @@ function aankoopVoorstelAfKeuren() {
 		    	if(response) {
 		    		fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    		.then(function(response){
-		    			console.log(response);
+		    			console.log(response.ok);
 		    			loadAankoopVoorstellen();
 				    })
 		    	}

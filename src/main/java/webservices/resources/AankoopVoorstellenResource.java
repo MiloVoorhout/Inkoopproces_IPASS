@@ -40,7 +40,7 @@ public class AankoopVoorstellenResource {
             job.add("product_id", purchaseProposals.getProduct_id());
             job.add("gebruikers_id", purchaseProposals.getUser_id());
             job.add("gk_id", purchaseProposals.getGk_proposal_id());
-            job.add("naam", purchaseProposals.getPrice()); 	
+            job.add("naam", purchaseProposals.getName()); 	
             job.add("totaalPrijs", (purchaseProposals.getAmount() * purchaseProposals.getPrice()));
             job.add("afdeling", purchaseProposals.getDepartment());
 
@@ -94,7 +94,7 @@ public class AankoopVoorstellenResource {
     @RolesAllowed("Voorstel manager")
     public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
-        boolean deleteStatus = inkoopService.delteProduct(id);
+        boolean deleteStatus = inkoopService.deleteProductProposal(id);
 
         return Response.ok(deleteStatus).build();
     }
