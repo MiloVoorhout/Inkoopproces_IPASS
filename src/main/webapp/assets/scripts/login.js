@@ -1,3 +1,15 @@
+function loginButtonClick() {
+    login();
+    
+    var input = document.getElementById("wachtwoord");
+    input.addEventListener("keyup", function(event) {
+        if(event.which == 13) {
+        	document.querySelector(".login-button").click();
+            return false;
+        }
+    });
+}
+
 function login() {
 	var inputGebruikersNaam = document.querySelector(".gebruikersnaam");
 	inputGebruikersNaam.value = '';
@@ -14,7 +26,7 @@ function login() {
                     return response.json();
                 }
                 else {
-//                    document.querySelector(".warning").innerText = "Ongeldig gebruikersnaam / wachtwoord";
+                    document.querySelector(".warning").innerText = "Ongeldig gebruikersnaam / wachtwoord";
                     return;
                 }
             })

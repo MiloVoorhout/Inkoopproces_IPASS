@@ -15,9 +15,7 @@ function initPage() {
 function loadStatus() {
 	var statusBody = document.querySelector(".status-div");
 	var userId = sessionStorage.getItem("id");
-	
-//	, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}}
-	
+		
 	fetch('restservices/gekeurde_voorstellen/'+userId)
 	.then(response => response.json())
 	.then(function(statussen){

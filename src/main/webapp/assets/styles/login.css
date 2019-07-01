@@ -52,6 +52,10 @@ form .form-group input {
 	background-color: #d81101;
 }
 
+.warning {
+    color: #FF0000;
+}
+
 /*==================
 	Phone version
 ==================*/

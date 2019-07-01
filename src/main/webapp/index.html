@@ -6,19 +6,19 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet"> 
 	<title>Login</title>
 </head>
-<body onload="login()">
-
+<body onload="loginButtonClick()">
 	<div class="login-content">
         <div class="login-form">
             <h2>Inloggen</h2>
             <form>
+				<span class="warning"></span>
                 <div class="form-group">
                     <label>Gebruikersnaam</label>
                     <input type="text" class="form-control gebruikersnaam" placeholder="Gebruikersnaam" name="username">
                 </div>
                 <div class="form-group">
                     <label>Wachtwoord</label>
-                    <input type="password" class="form-control" placeholder="Wachtwoord" name="password">
+                    <input type="password" class="form-control" placeholder="Wachtwoord" id="wachtwoord" name="password">
                 </div>
                 <input type="button" class="login-button" name="login" value="Inloggen">
             </form>
