@@ -89,7 +89,7 @@ public class AankoopVoorstellenResource {
     }
     
     @DELETE
-    @Path("delete/{PurchaseProposalId}")
+    @Path("/delete/{PurchaseProposalId}")
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
