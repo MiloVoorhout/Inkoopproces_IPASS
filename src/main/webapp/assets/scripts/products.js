@@ -1,11 +1,15 @@
 function initPage() {
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	loadProducts();
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		window.location.href = "/index.html";
+	} else {
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		loadProducts();
+	}
 }
 
 function loadProducts() {	
@@ -61,8 +65,6 @@ function deleteButton() {
 					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    .then(function(response){
 				    	if(response) {
-					    	console.log(response);
-					    	loadProducts();
 					    	var toastUp = document.getElementById("toastDelete");
 							toastUp.className = "show";
 							setTimeout(function(){ 
@@ -88,31 +90,29 @@ function deleteButton() {
 					    	if(response) {
 							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							    .then(function(response){
-							    	if(response) {
-									    fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
-									    .then(function(response){
-									    	if(response) {
-										    	console.log(response);
-										    	var toastUp = document.getElementById("toastDelete");
-												toastUp.className = "show";
-												setTimeout(function(){ 
-													toastUp.className = toastUp.className.replace("show", ""); 
-												}, 3000);
-									    	} else {
-									    		var toastUp = document.getElementById("toastFout");
-												toastUp.className = "show";
-												setTimeout(function(){ 
-													toastUp.className = toastUp.className.replace("show", ""); 
-												}, 3000);
-									    	}
-									    })
-							    	}
+							    	console.log(response.ok)
 							    })
 					    	}
 					    })
 					}	
 					
-					loadProducts();
+					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+				    .then(function(response){
+				    	if(response) {
+					    	var toastUp = document.getElementById("toastDelete");
+							toastUp.className = "show";
+							setTimeout(function(){ 
+								toastUp.className = toastUp.className.replace("show", ""); 
+							}, 3000);
+				    	} else {
+				    		var toastUp = document.getElementById("toastFout");
+							toastUp.className = "show";
+							setTimeout(function(){ 
+								toastUp.className = toastUp.className.replace("show", ""); 
+							}, 3000);
+				    	}
+				    })
+					
 					
 				} else {
 					var toastUp = document.getElementById("toastFout");
@@ -120,12 +120,11 @@ function deleteButton() {
 					setTimeout(function(){ 
 						toastUp.className = toastUp.className.replace("show", ""); 
 					}, 3000);
-					
-					loadProducts();
 				}
 			})
 		});
 	}
+	loadProducts
 }
 
 function editButton() {
@@ -167,8 +166,6 @@ function editButton() {
 						.then(response => response.json())
 					    .then(function(response){
 					    	if(response) {
-								console.log(response);
-								loadProducts();
 					    		var toastUp = document.getElementById("toastUpdate");
 								toastUp.className = "show";
 								setTimeout(function(){ 
@@ -214,21 +211,19 @@ function editButton() {
 								}
 						    })
 						}
-						
-						loadProducts();
-						
+												
 					} else {
 						var toastUp = document.getElementById("toastFout");
 						toastUp.className = "show";
 						setTimeout(function(){ 
 							toastUp.className = toastUp.className.replace("show", ""); 
 						}, 3000);
-						loadProducts();
 					}
 				})
 			});
 		});
 	}
+	loadProducts();
 }
 
 function tableFilter() {

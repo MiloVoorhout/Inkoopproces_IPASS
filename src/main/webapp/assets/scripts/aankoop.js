@@ -1,37 +1,41 @@
 function initPage() {
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	const modal = document.querySelector('.modal');
-	const openModalButton = document.querySelector('.fa-plus-circle');
-	const closeModalButton = document.querySelector('[data-close-button]');
-	const overlay = document.getElementById('overlay');
-	$("#productSelect, #voorstelAantal, #productReden, #productNaam, #productPrijs, #productCategorie").val('');
-	
-	
-	openModalButton.addEventListener('click', function(){
-		modal.classList.add('active')
-		overlay.classList.add('active')
-	})
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		window.location.href = "/index.html";
+	} else {
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		const modal = document.querySelector('.modal');
+		const openModalButton = document.querySelector('.fa-plus-circle');
+		const closeModalButton = document.querySelector('[data-close-button]');
+		const overlay = document.getElementById('overlay');
+		$("#productSelect, #voorstelAantal, #productReden, #productNaam, #productPrijs, #productCategorie").val('');
+		
+		
+		openModalButton.addEventListener('click', function(){
+			modal.classList.add('active')
+			overlay.classList.add('active')
+		})
 
-	overlay.addEventListener('click', function(){
-		$("#productNaam, #productPrijs, #productCategorie").val('');
-		modal.classList.remove('active');
-		overlay.classList.remove('active');
-	})
+		overlay.addEventListener('click', function(){
+			$("#productNaam, #productPrijs, #productCategorie").val('');
+			modal.classList.remove('active');
+			overlay.classList.remove('active');
+		})
 
-	closeModalButton.addEventListener('click', function() {
-		$("#productNaam, #productPrijs, #productCategorie").val('');
-		modal.classList.remove('active');
-		overlay.classList.remove('active');
-	})
-	
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	loadProducts();
-	saveProductVoorstel();
-	loadGebruiker();
-	saveAankoopVoorstel();
+		closeModalButton.addEventListener('click', function() {
+			$("#productNaam, #productPrijs, #productCategorie").val('');
+			modal.classList.remove('active');
+			overlay.classList.remove('active');
+		})
+		
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		loadProducts();
+		saveProductVoorstel();
+		loadGebruiker();
+		saveAankoopVoorstel();
+	}
 }
 
 function loadProducts() {	

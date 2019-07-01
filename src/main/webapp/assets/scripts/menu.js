@@ -1,19 +1,22 @@
 function initPage() {
-	const goToAankoop = document.querySelector('#aankoop');
-	const goToStatus = document.querySelector('#status');
-	
-	goToAankoop.addEventListener('click', function() {
-		console.log("aankoop");
-		window.location.href = "/aankoop.html";
-	})
-	
-	goToStatus.addEventListener('click', function() {
-		window.location.href = "/status.html";
-	})
-	
-	keurenButton();
-	uitlogButton();
-	
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		window.location.href = "/index.html";
+	} else {
+		const goToAankoop = document.querySelector('#aankoop');
+		const goToStatus = document.querySelector('#status');
+		
+		goToAankoop.addEventListener('click', function() {
+			console.log("aankoop");
+			window.location.href = "/aankoop.html";
+		})
+		
+		goToStatus.addEventListener('click', function() {
+			window.location.href = "/status.html";
+		})
+		
+		keurenButton();
+		uitlogButton();
+	}
 }
 
 function keurenButton() {

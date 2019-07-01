@@ -1,13 +1,17 @@
 function initPage() {
-	document.querySelector('#voorstellen').value = 'product';
-   
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-   
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-   
-	loadProductVoorstellen(); 
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		window.location.href = "/index.html";
+	} else {
+		document.querySelector('#voorstellen').value = 'product';
+	   
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+	   
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+	   
+		loadProductVoorstellen(); 
+	}
 }
 
 function loadProductVoorstellen() {

@@ -1,15 +1,10 @@
 function login() {
-	console.log(sessionStorage);
-	
 	var inputGebruikersNaam = document.querySelector(".gebruikersnaam");
 	inputGebruikersNaam.value = '';
 	
     document.querySelector(".login-button").addEventListener("click", function () {
         const formData = new FormData(document.querySelector("form"));
         const data = new URLSearchParams(formData.entries());
-        
-        console.log(data);
-        
 
         fetch('restservices/authenticatie', {method: 'POST', body: data, headers : {
             'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")

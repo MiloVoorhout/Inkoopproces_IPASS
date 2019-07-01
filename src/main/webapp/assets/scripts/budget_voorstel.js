@@ -1,11 +1,15 @@
 function initPage() {
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	loadBudgetVoorstellen();
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		window.location.href = "/index.html";
+	} else {
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		loadBudgetVoorstellen();
+	}
 }
 
 function loadBudgetVoorstellen() {
