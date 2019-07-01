@@ -22,33 +22,39 @@ function loadStatus() {
 	.then(response => response.json())
 	.then(function(statussen){
 		statusBody.innerHTML = '';
-		for(const status of statussen) {
-			if(status.status === "Goed gekeurd") {
-				statusCSS = "keuring-goed";
-				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
-			} else if (status.status === "Afgekeurd" || status.status === "Product verwijderd") {
-				statusCSS = "keuring-afgekeurd";
-				statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
-			} else {
-				statusCSS = "keuring-afwachting";
-				statusHeader = '';
+		if (statussen.length === 0) {
+			statusBody.innerHTML +=	'<div>' +
+										'<label>U heeft geen voorstellen ingediend</label>' +
+									'</div>';
+		} else {
+			for(const status of statussen) {
+				if(status.status === "Goed gekeurd") {
+					statusCSS = "keuring-goed";
+					statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
+				} else if (status.status === "Afgekeurd" || status.status === "Product verwijderd") {
+					statusCSS = "keuring-afgekeurd";
+					statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
+				} else {
+					statusCSS = "keuring-afwachting";
+					statusHeader = '';
+				}
+	
+				statusBody.innerHTML += '<div class="status-block" statusId="' + status.id + '">' +
+			        	'<div class="status-header">' +
+			        		'<label>Product:</label>' +
+			        		statusHeader +
+			        	'</div>' +
+			        	'<div class="product">' +
+			        		'<label>' + status.product + '</label>' +
+			        	'</div>' +
+			        	'<div class="' + statusCSS + '">' +
+							'<label>' + status.status + '</label>' +
+			        	'</div>' +
+			    	'</div>';
 			}
-
-			statusBody.innerHTML += '<div class="status-block" statusId="' + status.id + '">' +
-		        	'<div class="status-header">' +
-		        		'<label>Product:</label>' +
-		        		statusHeader +
-		        	'</div>' +
-		        	'<div class="product">' +
-		        		'<label>' + status.product + '</label>' +
-		        	'</div>' +
-		        	'<div class="' + statusCSS + '">' +
-						'<label>' + status.status + '</label>' +
-		        	'</div>' +
-		    	'</div>';
+			
+			deleteStatus();
 		}
-		
-		deleteStatus();
 	})
 }
 
