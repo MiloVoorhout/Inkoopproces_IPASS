@@ -56,6 +56,11 @@ form .form-group input {
     color: #FF0000;
 }
 
+input[type=button] {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
 /*==================
 	Phone version
 ==================*/

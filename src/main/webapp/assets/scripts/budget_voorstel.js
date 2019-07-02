@@ -1,19 +1,19 @@
-//Check if user is logged in
-if (window.sessionStorage.getItem("sessionToken") === null) {
-	//If not than send user to login page
-	window.location.href = "/index.html";
-	return;
-}
-
 function initPage() {
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	
-	//Give the go back button a event
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	loadBudgetVoorstellen();
+	//Check if user is logged in
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		//If not send him to login page
+		window.location.href = "/index.html";
+		return;
+	} else {
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		
+		//Give the go back button a event
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		loadBudgetVoorstellen();
+	}
 }
 
 function loadBudgetVoorstellen() {

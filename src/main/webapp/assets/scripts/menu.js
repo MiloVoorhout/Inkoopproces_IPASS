@@ -1,25 +1,25 @@
-//Check if user is logged in
-if (window.sessionStorage.getItem("sessionToken") === null) {
-	//If not send him to login page
-	window.location.href = "/index.html";
-	return;
-}
-
 function initPage() {
-	const goToAankoop = document.querySelector('#aankoop');
-	const goToStatus = document.querySelector('#status');
-		
-	//Make a event for the static buttons
-	goToAankoop.addEventListener('click', function() {
-		window.location.href = "/aankoop.html";
-	})
-		
-	goToStatus.addEventListener('click', function() {
-		window.location.href = "/status.html";
-	})
-		
-	keurenButton();
-	uitlogButton();
+	//Check if user is logged in
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		//If not send him to login page
+		window.location.href = "/index.html";
+		return;
+	} else {
+		const goToAankoop = document.querySelector('#aankoop');
+		const goToStatus = document.querySelector('#status');
+			
+		//Make a event for the static buttons
+		goToAankoop.addEventListener('click', function() {
+			window.location.href = "/aankoop.html";
+		})
+			
+		goToStatus.addEventListener('click', function() {
+			window.location.href = "/status.html";
+		})
+			
+		keurenButton();
+		uitlogButton();	
+	}
 }
 
 //This function is for special users that have the right to approve things

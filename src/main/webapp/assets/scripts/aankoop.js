@@ -1,51 +1,51 @@
-//Check if user is logged in
-if (window.sessionStorage.getItem("sessionToken") === null) {
-	//If not send user back to login page
-	window.location.href = "/index.html";
-	return;
-}
-
 function initPage() {
-	//Get everything we need for button events
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	const modal = document.querySelector('.modal');
-	const openModalButton = document.querySelector('.fa-plus-circle');
-	const closeModalButton = document.querySelector('[data-close-button]');
-	const overlay = document.getElementById('overlay');
-	//Empty every input field on the page
-	$("#productSelect, #voorstelAantal, #productReden, #productNaam, #productPrijs, #productCategorie").val('');
+	//Check if user is logged in
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		//If not send him to login page
+		window.location.href = "/index.html";
+		return;
+	} else {
+		//Get everything we need for button events
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		const modal = document.querySelector('.modal');
+		const openModalButton = document.querySelector('.fa-plus-circle');
+		const closeModalButton = document.querySelector('[data-close-button]');
+		const overlay = document.getElementById('overlay');
+		//Empty every input field on the page
+		$("#productSelect, #voorstelAantal, #productReden, #productNaam, #productPrijs, #productCategorie").val('');
+		
+		//Give an event to the modal opening button
+		openModalButton.addEventListener('click', function(){
+			modal.classList.add('active')
+			overlay.classList.add('active')
+		})
 	
-	//Give an event to the modal opening button
-	openModalButton.addEventListener('click', function(){
-		modal.classList.add('active')
-		overlay.classList.add('active')
-	})
-
-	//Give an event for clicking outside the modal
-	overlay.addEventListener('click', function(){
-		//empty the input fields
-		$("#productNaam, #productPrijs, #productCategorie").val('');
-		modal.classList.remove('active');
-		overlay.classList.remove('active');
-	})
-
-	//Give an event for closing the modal button
-	closeModalButton.addEventListener('click', function() {
-		//empty the input fields
-		$("#productNaam, #productPrijs, #productCategorie").val('');
-		modal.classList.remove('active');
-		overlay.classList.remove('active');
-	})
-		
-	//Give the go back button a event
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-		
-	loadProducts();
-	saveProductVoorstel();
-	loadGebruiker();
-	saveAankoopVoorstel();
+		//Give an event for clicking outside the modal
+		overlay.addEventListener('click', function(){
+			//empty the input fields
+			$("#productNaam, #productPrijs, #productCategorie").val('');
+			modal.classList.remove('active');
+			overlay.classList.remove('active');
+		})
+	
+		//Give an event for closing the modal button
+		closeModalButton.addEventListener('click', function() {
+			//empty the input fields
+			$("#productNaam, #productPrijs, #productCategorie").val('');
+			modal.classList.remove('active');
+			overlay.classList.remove('active');
+		})
+			
+		//Give the go back button a event
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+			
+		loadProducts();
+		saveProductVoorstel();
+		loadGebruiker();
+		saveAankoopVoorstel();
+	}
 }
 
 function loadProducts() {	

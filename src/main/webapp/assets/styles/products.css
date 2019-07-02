@@ -86,6 +86,11 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input[type=button] {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
 .hidden {
 	visibility: hidden;
 }

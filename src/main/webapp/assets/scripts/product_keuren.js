@@ -1,23 +1,23 @@
-//Check if user is logged in
-if (window.sessionStorage.getItem("sessionToken") === null) {
-	//If not then send to login page
-	window.location.href = "/index.html";
-	return;
-}
-
 function initPage() {
-	//Set the select value to product
-	document.querySelector('#voorstellen').value = 'product';
-	
-	//Make an event for the go back button
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	   
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	//Start load product proposals
-	loadProductVoorstellen(); 
+	//Check if user is logged in
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		//If not send him to login page
+		window.location.href = "/index.html";
+		return;
+	} else {
+		//Set the select value to product
+		document.querySelector('#voorstellen').value = 'product';
+		
+		//Make an event for the go back button
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		   
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		//Start load product proposals
+		loadProductVoorstellen(); 
+	}
 }
 
 function loadProductVoorstellen() {

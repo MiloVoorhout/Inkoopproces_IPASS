@@ -67,6 +67,11 @@ header {
 	border: 1px solid #364e57;
 }
 
+input[type=button] {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
 /*==================
 	Phone version
 ==================*/

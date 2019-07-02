@@ -1,19 +1,19 @@
-//Check if user is logged in 
-if (window.sessionStorage.getItem("sessionToken") === null) {
-	//If not send user back to login screen
-	window.location.href = "/index.html";
-	return;
-}
-
 function initPage() {
-	//Make an event for the go back button
-	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-	
-	goBack.addEventListener('click', function() {
-		window.location.href = "/menu.html";
-	})
-	
-	loadProducts();
+	//Check if user is logged in
+	if (window.sessionStorage.getItem("sessionToken") === null) {
+		//If not send him to login page
+		window.location.href = "/index.html";
+		return;
+	} else {
+		//Make an event for the go back button
+		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+		
+		goBack.addEventListener('click', function() {
+			window.location.href = "/menu.html";
+		})
+		
+		loadProducts();
+	}
 }
 
 function loadProducts() {	

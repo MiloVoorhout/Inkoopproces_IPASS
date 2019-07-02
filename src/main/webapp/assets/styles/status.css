@@ -99,6 +99,11 @@ header {
 	font-size: 20px;
 }
 
+input[type=button] {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
 /*==================
 	Phone version
 ==================*/
