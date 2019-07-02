@@ -109,7 +109,7 @@ function budgetVoorstelAfkeuren() {
 			//Get all the information
 			gkVoorstelId = this.parentNode.parentNode.getAttribute("gkVoorstelId");
 			updateStatus = "Goed gekeurd";
-			budgetId = this.parentNode.parentNode.getAttribute("budgetId");
+			budgetProposalId = this.parentNode.parentNode.getAttribute("budgetProposalId");
 			
 			//First fetch the information to update the approved proposals table status to disapproved
 			fetch("restservices/gekeurde_voorstellen/update/", {method: 'PUT', body: JSON.stringify({gkVoorstelId, updateStatus}), headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
@@ -117,7 +117,7 @@ function budgetVoorstelAfkeuren() {
 		    .then(function(response){
 		    	//If the budget update gives a ok response we will delete the proposal
 		    	if(response) {
-		    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+		    		fetch("restservices/budget_voorstellen/delete/"+budgetProposalId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 		    		.then(function(response){
 		    			loadBudgetVoorstellen();
 				    })
