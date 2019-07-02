@@ -3,6 +3,12 @@
 ## **Heroku en database url:**
 **Applicatie url:** https://ipass-milovoorhout.herokuapp.com/  
 **Database url:** postgres://sztsazkugldniy:6f647c8fcb24278a33af5b9ebd84a777428dc5a8b6df1b9c980c7ad9481dd8cd@ec2-54-217-234-157.eu-west-1.compute.amazonaws.com:5432/ddc9lqlf6qkl9a  
+
+User: sztsazkugldniy  
+Password: 6f647c8fcb24278a33af5b9ebd84a777428dc5a8b6df1b9c980c7ad9481dd8cd  
+Server: ec2-54-217-234-157.eu-west-1.compute.amazonaws.com  
+Port: 5432  
+Databasename: ddc9lqlf6qkl9a  
   
 ## **Gebruikers:**  
   gebruikersnaam: 'milovoorhout' & wachtwoord: 'milotest' (Dit is een 'User')  
