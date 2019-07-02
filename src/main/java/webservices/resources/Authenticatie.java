@@ -43,7 +43,7 @@ public class Authenticatie {
 
             Map<String, String> responseMessages = new HashMap<>();
 									            responseMessages.put("JWT", token);
-									            responseMessages.put("role", role);
+									            responseMessages.put("rol", role);
 									            responseMessages.put("id", Integer.toString(gebruiker.getId()));
             return Response.ok(responseMessages).build();
 
