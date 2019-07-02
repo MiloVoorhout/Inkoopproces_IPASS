@@ -114,11 +114,8 @@ function deleteButton() {
 					    		//Delete purchase proposals with product id x
 							    fetch("restservices/aankoop_voorstellen/delete/product/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							    .then(function(response){
-							    	console.log(response);
 							    	if(response){
-							    		
 								    	//Delete the product
-								    	console.log(productId);
 										fetch("restservices/product/delete/"+productId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 									    .then(function(response){
 									    	if(response) {

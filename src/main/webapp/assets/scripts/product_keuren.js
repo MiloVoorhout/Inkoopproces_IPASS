@@ -309,6 +309,9 @@ function loadBudget() {
 	var budgetAfdeling = document.querySelector(".budget-afdelingen");
 	var budgetDiv = document.querySelector(".budget-div");
 	
+	budgetAfdelingen.innerHTML = '';
+	budgetDiv.innerHTML = '';
+	
 	budgetDiv.innerHTML += '<table boder="1" class="budget-table">' +
 								'<thead>' +
 									'<tr>' +
