@@ -17,6 +17,8 @@ function initPage() {
 		
 		//Start load product proposals
 		loadProductVoorstellen(); 
+		//Bind budget proposal button
+		budgetVoorstel();
 	}
 }
 
@@ -349,7 +351,6 @@ function loadBudget() {
 		}
 		
 		//Start the following function
-		budgetVoorstel();
 		makeModal();
 		loadGebruiker();
 	});	
