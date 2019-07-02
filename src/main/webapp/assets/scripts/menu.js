@@ -26,7 +26,7 @@ function initPage() {
 function keurenButton() {
 	const menuButtonBody = document.querySelector('.menu-buttons');
 	
-	var role = sessionStorage.getItem("rol");
+	var role = sessionStorage.getItem("role");
 	//If user is a Voorstel manager add 2 buttons for approving products and seeing all the products
 	if (role === "Voorstel manager") {
 		menuButtonBody.innerHTML += '<div class="button-div">' +
