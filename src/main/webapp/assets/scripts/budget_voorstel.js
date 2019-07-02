@@ -36,7 +36,7 @@ function loadBudgetVoorstellen() {
 	        	const increasementEuro = budgetP.increasement;
 	        	
 	        	//Add to the budget body
-	        	budgetBody.innerHTML += '<div class="budget-hole" budgetId="' + budgetP.budget_id +'" budgetIncreasement="' + increasementEuro.toFixed(2) +'" gkProposalId="' + budgetP.gk_id +'">' +
+	        	budgetBody.innerHTML += '<div class="budget-hole" budgetProposalId="' + budgetP.id +'" budgetId="' + budgetP.budget_id +'" budgetIncreasement="' + increasementEuro.toFixed(2) +'" gkProposalId="' + budgetP.gk_id +'">' +
 		        	'<div class="budget-block">' +
 		        		'<div>' +
 		        			'<label>Werknemer:' + ' ' + budgetP.user_id + '</label>' +
@@ -74,6 +74,7 @@ function budgetVoorstelGoedkeuren() {
 			
 			type = "plus";
 			budgetId = this.parentNode.parentNode.getAttribute("budgetId");
+			budgetProposalId = this.parentNode.parentNode.getAttribute("budgetProposalId");
 			budgetPrijs = this.parentNode.parentNode.getAttribute("budgetIncreasement");
 			
 			//First fetch the information to update the approved proposals table status to approved
@@ -87,8 +88,7 @@ function budgetVoorstelGoedkeuren() {
 				    .then(function(response){
 				    	//If the budget update gives a ok response we will delete the proposal
 				    	if(response) {
-				    		console.log(budgetId);
-				    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+				    		fetch("restservices/budget_voorstellen/delete/"+budgetProposalId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    		.then(function(response){
 				    			loadBudgetVoorstellen();
 						    })
