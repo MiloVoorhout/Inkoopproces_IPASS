@@ -1,15 +1,19 @@
+//Check if user is logged in
+if (window.sessionStorage.getItem("sessionToken") === null) {
+	//If user isn't logged in then send to login page
+	window.location.href = "/index.html";
+	return null;
+}
+
 function initPage() {
-	if (window.sessionStorage.getItem("sessionToken") === null) {
-		window.location.href = "/index.html";
-	} else {
-		const goBack = document.querySelector('.fa-arrow-alt-circle-left');
-		
-		goBack.addEventListener('click', function() {
-			window.location.href = "/menu.html";
-		})
-		
-	    loadStatus();
-	}
+	const goBack = document.querySelector('.fa-arrow-alt-circle-left');
+	
+	//Give the go back to menu button a event
+	goBack.addEventListener('click', function() {
+		window.location.href = "/menu.html";
+	})
+	
+    loadStatus();
 }
 
 function loadStatus() {
@@ -20,19 +24,27 @@ function loadStatus() {
 	.then(response => response.json())
 	.then(function(statussen){
 		statusBody.innerHTML = '';
+		
+		//Check if the user has any statussen or not
 		if (statussen.length === 0) {
 			statusBody.innerHTML +=	'<div>' +
 										'<label>U heeft geen voorstellen ingediend</label>' +
 									'</div>';
 		} else {
 			for(const status of statussen) {
+				//Check what the status of a status is to determine the color of the status text
 				if(status.status === "Goed gekeurd") {
+					//Green color
 					statusCSS = "keuring-goed";
+					//Option to delete status
 					statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
 				} else if (status.status === "Afgekeurd" || status.status === "Product verwijderd") {
+					//Red color
 					statusCSS = "keuring-afgekeurd";
+					//Option to delete status
 					statusHeader = '<i class="fas fa-times status-verwijderen"></i>';
 				} else {
+					//Yellow color
 					statusCSS = "keuring-afwachting";
 					statusHeader = '';
 				}
@@ -60,6 +72,7 @@ function deleteStatus() {
 	var statussen = document.querySelectorAll(".status-verwijderen");
 	for(const status of statussen) {
 		status.addEventListener("click", function(){
+			//This gets the id that we added in the statusBody in the status-block div
 			statusId = this.parentNode.parentNode.getAttribute("statusId");
 			
 			fetch("restservices/gekeurde_voorstellen/delete/"+statusId, {method: 'DELETE'})

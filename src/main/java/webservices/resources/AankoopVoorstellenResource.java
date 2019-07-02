@@ -28,10 +28,12 @@ public class AankoopVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public String getPurchaseProposal(@PathParam("userId") int id) {
+    	/*Make a connection and create a Json array*/
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (AankoopVoorstellen purchaseProposals : inkoopService.getPurchaseProposal(id)) {
+        	/*Make for every purchase proposal a Json and add it to the arraylist*/
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", purchaseProposals.getId());
@@ -48,6 +50,7 @@ public class AankoopVoorstellenResource {
         }
 
         JsonArray array = jab.build();
+    	/*Return the arraylist*/
         return array.toString();
     }
     
@@ -56,10 +59,12 @@ public class AankoopVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public String getPurchaseProposalId(@PathParam("productId") int id) {
+    	/*Make a connection and create a Json array*/
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (AankoopVoorstellen purchaseProposal : inkoopService.getPurchaseProposalId(id)) {
+        	/*Make for every purchase proposal a Json and add it to the arraylist*/
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", purchaseProposal.getId());
@@ -71,19 +76,23 @@ public class AankoopVoorstellenResource {
         }
 
         JsonArray array = jab.build();
+    	/*Return the arraylist*/
         return array.toString();
     }
     
     @POST
     @Path("/save")
     @Produces("application/json")
-    public Response addPurchaseProposal(String response) throws ParseException{    	
+    public Response addPurchaseProposal(String response) throws ParseException{  
+    	/*Make a connection and get information given to the function*/
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
+    	/*Make a purchase proposal*/
     	AankoopVoorstellen purchaseProposal = new AankoopVoorstellen(Integer.parseInt(json.get("productAantal").toString()), json.get("aankoopReden").toString(), Integer.parseInt(json.get("productId").toString()), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
+    	/*Get boolean back from adding the proposal*/
         boolean savePurchaseProposal = inkoopService.addPurchaseProposal(purchaseProposal);
         return Response.ok(savePurchaseProposal).build();
     }
@@ -93,7 +102,9 @@ public class AankoopVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public Response deletePurchaseProposal(@PathParam("PurchaseProposalId") int id) {
+    	/*Make a connection and get information given to the function*/
     	InkoopService inkoopService= ServiceProvider.getInkoopService();
+    	/*Get boolean back from deleting the proposal*/
         boolean deleteStatus = inkoopService.deletePurchaseProposal(id);
 
         return Response.ok(deleteStatus).build();

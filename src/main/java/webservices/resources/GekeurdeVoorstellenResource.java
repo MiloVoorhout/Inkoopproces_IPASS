@@ -28,10 +28,12 @@ public class GekeurdeVoorstellenResource {
     @Path("/{userId}")
     @Produces("application/json")
     public String getGekeurdeVoorstellen(@PathParam("userId") int id) {
+    	/*Make a connection and create a Json array*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (GekeurdeVoorstellen approvedProposal : inkoopService.getGekeurdeVoorstellen(id)) {
+        	/*Make for every approved proposal a Json and add it to the arraylist*/
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", approvedProposal.getId());
@@ -50,12 +52,15 @@ public class GekeurdeVoorstellenResource {
     @Path("/save")
     @Produces("application/json")
     public int addGekeurdeVoorstel(String response) throws ParseException{   
+    	/*Make a connection and get information given to the fucntion*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
+    	/*Make a approved proposal*/
     	GekeurdeVoorstellen approvedProposal = new GekeurdeVoorstellen(json.get("productNaam").toString(), "In afwachting", Integer.parseInt(json.get("gebruikerId").toString()));
 
+    	/*Get boolean back from adding the proposal*/
         int saveApprovedProposal = inkoopService.addGekeurdeVoorstel(approvedProposal);
         return saveApprovedProposal;
     }
@@ -65,13 +70,16 @@ public class GekeurdeVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed({"Voorstel manager", "Budget manager"})
     public boolean updateGekeurdeVoorstel(String response) throws ParseException{  
+    	/*Make a connection and get information given to the function*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
+    	/*Get the necessary information*/
     	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
     	String approvedProposalStatus = json.get("updateStatus").toString();
-
+    	
+    	/*Get boolean back from updating the approved proposal*/
         boolean updateApprovedProposal = inkoopService.updateGekeurdeVoorstel(approvedProposalId, approvedProposalStatus);
         return updateApprovedProposal;
     }
@@ -80,14 +88,17 @@ public class GekeurdeVoorstellenResource {
     @Path("/update_product")
     @Produces("application/json")
     @RolesAllowed({"Voorstel manager", "Budget manager"})
-    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{    
+    public boolean updateNameGekeurdeVoorstel(String response) throws ParseException{   
+    	/*Make a connection and get information given to the function*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
+    	/*Get the necessary information*/
     	int approvedProposalId = Integer.parseInt(json.get("gkVoorstelId").toString());
     	String approvedProposalName = json.get("updateName").toString();
 
+    	/*Get boolean back from updating the approved proposal*/
         boolean updateName = inkoopService.updateNameGekeurdeVoorstel(approvedProposalId, approvedProposalName);
         return updateName;
     }
@@ -96,8 +107,11 @@ public class GekeurdeVoorstellenResource {
     @Path("delete/{statusId}")
     @Produces("application/json")
     public Response deleteStatus(@PathParam("statusId") int id) {
+    	/*Make a connection to service provider*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
+    	/*Get boolean back from deleting the proposal*/
         boolean deleteStatus = inkoopService.deleteStatus(id);
+        
         return Response.ok(deleteStatus).build();
     }
 }

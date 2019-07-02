@@ -1,6 +1,7 @@
 function loginButtonClick() {
     login();
     
+    //If you press enter after entering your password start click function
     var input = document.getElementById("wachtwoord");
     input.addEventListener("keyup", function(event) {
         if(event.which == 13) {
@@ -15,6 +16,7 @@ function login() {
 	inputGebruikersNaam.value = '';
 	
     document.querySelector(".login-button").addEventListener("click", function () {
+    	//Get the entered data
         const formData = new FormData(document.querySelector("form"));
         const data = new URLSearchParams(formData.entries());
 

@@ -18,10 +18,12 @@ public class GebruikerResource {
     @Path("{statusId}")
     @Produces("application/json")
     public String getUser(@PathParam("statusId") int id) {
+    	/*Make a connection and create a Json array*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (Gebruiker user : inkoopService.getUser(id)) {
+        	/*Make for every user a Json and add it to the arraylist*/
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", user.getId());

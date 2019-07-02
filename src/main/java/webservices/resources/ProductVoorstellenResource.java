@@ -29,10 +29,12 @@ public class ProductVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public String getProducts(@PathParam("userId") int id) {
+    	/*Make a connection and create a Json array*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         
         for (ProductVoorstel productProposal : inkoopService.getProductsWithId(id)) {
+        	/*Make for every product a Json and add it to the arraylist*/
             JsonObjectBuilder job = Json.createObjectBuilder();
             
             job.add("id", productProposal.getId());
@@ -53,12 +55,15 @@ public class ProductVoorstellenResource {
     @Path("/save")
     @Produces("application/json")
     public Response addProductProposal(String response) throws ParseException{    	
+    	/*Make a connection and get information given to the function*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
     	JSONParser parser = new JSONParser();
     	JSONObject json = (JSONObject) parser.parse(response);
 
+    	/*Get the necessary information*/
     	ProductVoorstel productProposal = new ProductVoorstel(json.get("productNaam").toString(), Double.parseDouble(json.get("productPrijs").toString()), json.get("productCategorie").toString(), Integer.parseInt(json.get("gebruikerId").toString()),  Integer.parseInt(json.get("response").toString()));
 
+    	/*Get boolean back from updating the product proposal*/
         boolean saveProductProposal = inkoopService.addProductProposal(productProposal);
         return Response.ok(saveProductProposal).build();
     }
@@ -68,7 +73,9 @@ public class ProductVoorstellenResource {
     @Produces("application/json")
     @RolesAllowed("Voorstel manager")
     public Response deleteProductProposal(@PathParam("productProposalId") int id) {
+    	/*Make a connection to service provider*/
     	InkoopService inkoopService = ServiceProvider.getInkoopService();
+    	/*Get boolean back from deleting the proposal*/
         boolean deleteStatus = inkoopService.deleteProductProposal(id);
 
         return Response.ok(deleteStatus).build();
