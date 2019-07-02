@@ -109,4 +109,17 @@ public class AankoopVoorstellenResource {
 
         return Response.ok(deleteStatus).build();
     }
+    
+    @DELETE
+    @Path("delete/product/{PurchaseProposalId}")
+    @Produces("application/json")
+    @RolesAllowed("Voorstel manager")
+    public Response deletePurchaseProposalByProductId(@PathParam("PurchaseProposalId") int id) {
+    	/*Make a connection and get information given to the function*/
+    	InkoopService inkoopService= ServiceProvider.getInkoopService();
+    	/*Get boolean back from deleting the proposal*/
+        boolean deleteStatus = inkoopService.deletePurchaseProposal(id);
+
+        return Response.ok(deleteStatus).build();
+    }
 }

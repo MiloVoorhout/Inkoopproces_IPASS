@@ -107,5 +107,20 @@ public class AankoopVoorstellenDaoImpl extends PostgresBaseDao implements Aankoo
             return false;
         }
 	}
+	
+	public Boolean deleteByProduct(int id) {
+    	try {
+            String deleteQuery = "DELETE FROM aankoop_voorstellen WHERE product_id = ?";
+            PreparedStatement delete = conn.prepareStatement(deleteQuery);
+            delete.setInt(1, id);
+            delete.executeUpdate();
+            
+            delete.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
 
 }

@@ -68,16 +68,16 @@ function deleteButton() {
 	var selectRows = document.querySelectorAll(".fa-trash-alt");
 	for(const product of selectRows) {
 		product.addEventListener("click", function(){
-			var id = this.parentNode.parentNode.getAttribute("productId");
+			var productId = this.parentNode.parentNode.getAttribute("productId");
 			
 			//Get every purchase proposal with the deleted product id
-			fetch('restservices/aankoop_voorstellen/products/'+id, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+			fetch('restservices/aankoop_voorstellen/products/'+productId, {method : 'GET', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 			.then(response => response.json())
 			.then(function(aankoopVoorstellen){
 				//Check if there are purchase proposals with that product id 
 				if(aankoopVoorstellen.length === 0) {
 					//If there aren't any delete the product
-					fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+					fetch("restservices/product/delete/"+productId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    .then(function(response){
 				    	if(response) {
 				    		//After deleting reload products
@@ -112,30 +112,35 @@ function deleteButton() {
 					    .then(function(response){
 					    	if(response) {
 					    		//Delete purchase proposals with product id x
-							    fetch("restservices/aankoop_voorstellen/delete/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+							    fetch("restservices/aankoop_voorstellen/delete/product/"+aankoopVoorstelId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 							    .then(function(response){
-							    	//Delete the product
-									fetch("restservices/product/delete/"+id, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
-								    .then(function(response){
-								    	if(response) {
-								    		//If product deleted reload products
-								    		loadProducts();
-
-								    		//Show product deleted toast
-									    	var toastUp = document.getElementById("toastDelete");
-											toastUp.className = "show";
-											setTimeout(function(){ 
-												toastUp.className = toastUp.className.replace("show", ""); 
-											}, 3000);
-								    	} else {
-								    		//If response not ok show error toast
-								    		var toastUp = document.getElementById("toastFout");
-											toastUp.className = "show";
-											setTimeout(function(){ 
-												toastUp.className = toastUp.className.replace("show", ""); 
-											}, 3000);
-								    	}
-								    })
+							    	console.log(response);
+							    	if(response){
+							    		
+								    	//Delete the product
+								    	console.log(productId);
+										fetch("restservices/product/delete/"+productId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
+									    .then(function(response){
+									    	if(response) {
+									    		//If product deleted reload products
+									    		loadProducts();
+	
+									    		//Show product deleted toast
+										    	var toastUp = document.getElementById("toastDelete");
+												toastUp.className = "show";
+												setTimeout(function(){ 
+													toastUp.className = toastUp.className.replace("show", ""); 
+												}, 3000);
+									    	} else {
+									    		//If response not ok show error toast
+									    		var toastUp = document.getElementById("toastFout");
+												toastUp.className = "show";
+												setTimeout(function(){ 
+													toastUp.className = toastUp.className.replace("show", ""); 
+												}, 3000);
+									    	}
+									    })
+							    	}
 							    })
 					    	}
 					    })

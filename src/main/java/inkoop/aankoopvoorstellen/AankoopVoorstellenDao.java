@@ -10,4 +10,6 @@ public interface AankoopVoorstellenDao {
     public Boolean save(AankoopVoorstellen purchaseProposals);
     
     public Boolean delete(int id);
+    
+	public Boolean deleteByProduct(int id);
 }

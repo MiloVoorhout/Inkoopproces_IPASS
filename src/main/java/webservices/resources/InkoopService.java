@@ -63,6 +63,12 @@ public class InkoopService {
         return purchaseProposalDao.delete(id);
     }
     
+    @DELETE
+    @Produces("application/json")
+    public Boolean deletePurchaseProposalByProductId(int id) {
+        return purchaseProposalDao.deleteByProduct(id);
+    }
+    
     
 //	================
 //  Budget functions
