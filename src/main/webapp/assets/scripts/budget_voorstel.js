@@ -107,7 +107,7 @@ function budgetVoorstelAfkeuren() {
 	for(const bVoorstel of budgetVoorstellenVerwijderen) {
 		bVoorstel.addEventListener("click", function(){
 			//Get all the information
-			gkVoorstelId = this.parentNode.parentNode.getAttribute("gkVoorstelId");
+			gkVoorstelId = this.parentNode.parentNode.getAttribute("gkProposalId");
 			updateStatus = "Goed gekeurd";
 			budgetProposalId = this.parentNode.parentNode.getAttribute("budgetProposalId");
 			
