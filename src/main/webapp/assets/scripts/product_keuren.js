@@ -2,7 +2,7 @@
 if (window.sessionStorage.getItem("sessionToken") === null) {
 	//If not then send to login page
 	window.location.href = "/index.html";
-	return null;
+	return;
 }
 
 function initPage() {
