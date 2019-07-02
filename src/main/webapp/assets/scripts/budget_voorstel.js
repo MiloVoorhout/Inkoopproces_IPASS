@@ -87,6 +87,7 @@ function budgetVoorstelGoedkeuren() {
 				    .then(function(response){
 				    	//If the budget update gives a ok response we will delete the proposal
 				    	if(response) {
+				    		console.log(budgetId);
 				    		fetch("restservices/budget_voorstellen/delete/"+budgetId, {method: 'DELETE', headers : {'Authorization': 'Bearer ' +  window.sessionStorage.getItem("sessionToken")}})
 				    		.then(function(response){
 				    			loadBudgetVoorstellen();
