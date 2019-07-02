@@ -36,7 +36,7 @@ function login() {
             	console.log(response);
                 sessionStorage.setItem("sessionToken", response.JWT);
                 sessionStorage.setItem("id", response.id);
-                sessionStorage.setItem("rol", response.role);
+                sessionStorage.setItem("rol", response.rol);
                 window.location.href = "/menu.html";
             })
             .catch(error => console.log(error));
